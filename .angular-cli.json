@@ -19,9 +19,26 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "assets/css/font-awesome.css",
+        "assets/css/bootstrap.css",
+        "assets/css/animate.min.css",
+        "assets/css/owl.carousel.css",
+        "assets/css/owl.theme.css",
+        "assets/css/style.default.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/js/respond.min.js",
+        "assets/js/jquery-1.11.0.min.js",
+        "assets/js/bootstrap.min.js",
+        "assets/js/jquery.cookie.js",
+        "assets/js/waypoints.min.js",
+        "assets/js/modernizr.js",
+        "assets/js/bootstrap-hover-dropdown.js",
+        "assets/js/owl.carousel.min.js",
+        "assets/js/front.js",
+        "assets/js/main.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
