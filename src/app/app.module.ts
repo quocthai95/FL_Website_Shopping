@@ -8,6 +8,8 @@ import { FooterComponent } from './core/footer/footer.component';
 import { HomeComponent } from './shop/home/home.component';
 import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
+import { AppRouteModule } from './app-route.module';
+import { InitService } from './shared/init.service';
 
 
 @NgModule({
@@ -17,9 +19,10 @@ import { ShopModule } from './shop/shop.module';
   imports: [
     BrowserModule,
     CoreModule,
-    ShopModule
+    ShopModule,
+    AppRouteModule
   ],
-  providers: [],
+  providers: [InitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

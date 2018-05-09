@@ -36,7 +36,6 @@
         "assets/js/modernizr.js",
         "assets/js/bootstrap-hover-dropdown.js",
         "assets/js/owl.carousel.min.js",
-        "assets/js/front.js",
         "assets/js/main.js"
       ],
       "environmentSource": "environments/environment.ts",
