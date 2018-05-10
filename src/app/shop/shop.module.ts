@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './category/product-detail/product-detail
 import { GeneralComponent } from './category/general/general.component';
 import { RouterModule } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { CartComponent } from './cart/cart.component';
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        OwlModule
     ],
     exports: [
         HomeComponent,

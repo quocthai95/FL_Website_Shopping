@@ -2,7 +2,8 @@
 
   <div class="container">
     <div class="col-md-12">
-      <div id="main-slider">
+      <owl-carousel id="main-slider"[options]="{items: 1, autoplay: true, dots: true, navigation: true}"
+      [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']" >
         <div class="item">
           <img src="assets/images/main-slider1.jpg" alt="" class="img-responsive">
         </div>
@@ -15,7 +16,7 @@
         <div class="item">
           <img class="img-responsive" src="assets/images/main-slider4.jpg" alt="">
         </div>
-      </div>
+      </owl-carousel>
       <!-- /#main-slider -->
     </div>
   </div>
@@ -87,79 +88,53 @@ _________________________________________________________ -->
       </div>
     </div>
 
+    
+
     <div class="container">
-      <div class="product-slider">
-        <div class="item">
+      <owl-carousel class="product-slider" [options]="{items: 6, dots: true, navigation: true}"
+      [items]="products.hot" 
+      [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
+        <div class="item" *ngFor="let item of products.hot">
           <div class="product">
             <div class="flip-container">
               <div class="flipper">
                 <div class="front">
                   <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product1.jpg" alt="" class="img-responsive">
+                    <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
                   <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product1_2.jpg" alt="" class="img-responsive">
+                    <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div>
             <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product1.jpg" alt="" class="img-responsive">
+              <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/category','detail']">Fur coat with very but very very long name</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">White Blouse Armani</a>
+                <a [routerLink]="['/category','detail']">{{item.description}}</a>
               </h3>
               <p class="price">
-                <del>$280</del> $143.00</p>
+                <del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>
             </div>
             <!-- /.text -->
 
-            <div class="ribbon sale">
+            <div class="ribbon sale" *ngIf="item.sale">
               <div class="theribbon">SALE</div>
               <div class="ribbon-background"></div>
             </div>
             <!-- /.ribbon -->
 
-            <div class="ribbon new">
+            <div class="ribbon new" *ngIf="item.new">
               <div class="theribbon">NEW</div>
               <div class="ribbon-background"></div>
             </div>
             <!-- /.ribbon -->
 
-            <div class="ribbon gift">
+            <div class="ribbon gift" *ngIf="item.gift">
               <div class="theribbon">GIFT</div>
               <div class="ribbon-background"></div>
             </div>
@@ -167,221 +142,7 @@ _________________________________________________________ -->
           </div>
           <!-- /.product -->
         </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">Black Blouse Versace</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">Black Blouse Versace</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">White Blouse Versace</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-
-            <div class="ribbon new">
-              <div class="theribbon">NEW</div>
-              <div class="ribbon-background"></div>
-            </div>
-            <!-- /.ribbon -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product1.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product1_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product1.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">Fur coat</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-
-            <div class="ribbon gift">
-              <div class="theribbon">GIFT</div>
-              <div class="ribbon-background"></div>
-            </div>
-            <!-- /.ribbon -->
-
-          </div>
-          <!-- /.product -->
-        </div>
-        <!-- /.col-md-4 -->
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product2_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product2.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">White Blouse Armani</a>
-              </h3>
-              <p class="price">
-                <del>$280</del> $143.00</p>
-            </div>
-            <!-- /.text -->
-
-            <div class="ribbon sale">
-              <div class="theribbon">SALE</div>
-              <div class="ribbon-background"></div>
-            </div>
-            <!-- /.ribbon -->
-
-            <div class="ribbon new">
-              <div class="theribbon">NEW</div>
-              <div class="ribbon-background"></div>
-            </div>
-            <!-- /.ribbon -->
-
-            <div class="ribbon gift">
-              <div class="theribbon">GIFT</div>
-              <div class="ribbon-background"></div>
-            </div>
-            <!-- /.ribbon -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-        <div class="item">
-          <div class="product">
-            <div class="flip-container">
-              <div class="flipper">
-                <div class="front">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-                <div class="back">
-                  <a [routerLink]="['/category','detail']">
-                    <img src="assets/images/product3_2.jpg" alt="" class="img-responsive">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
-              <img src="assets/images/product3.jpg" alt="" class="img-responsive">
-            </a>
-            <div class="text">
-              <h3>
-                <a [routerLink]="['/category','detail']">Black Blouse Versace</a>
-              </h3>
-              <p class="price">$143.00</p>
-            </div>
-            <!-- /.text -->
-          </div>
-          <!-- /.product -->
-        </div>
-
-      </div>
+      </owl-carousel>
       <!-- /.product-slider -->
     </div>
     <!-- /.container -->
@@ -390,35 +151,6 @@ _________________________________________________________ -->
   <!-- /#hot -->
 
   <!-- *** HOT END *** -->
-
-  <!-- *** GET INSPIRED ***
-_________________________________________________________ -->
-  <div class="container" >
-    <div class="col-md-12">
-      <div class="box slideshow">
-        <h3>Get Inspired</h3>
-        <p class="lead">Get the inspiration from our world class designers</p>
-        <div id="get-inspired" class="owl-carousel owl-theme">
-          <div class="item">
-            <a href="#">
-              <img src="assets/images/getinspired1.jpg" alt="Get inspired" class="img-responsive">
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img src="assets/images/getinspired2.jpg" alt="Get inspired" class="img-responsive">
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img src="assets/images/getinspired3.jpg" alt="Get inspired" class="img-responsive">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- *** GET INSPIRED END *** -->
 
   <!-- *** BLOG HOMEPAGE ***
 _________________________________________________________ -->
