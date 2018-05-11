@@ -7,6 +7,7 @@ import { GeneralComponent } from './category/general/general.component';
 import { RouterModule } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
 import { OwlModule } from 'ngx-owl-carousel';
+import { ProductDetailResolve } from '../shared/productDetail.resolve';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,9 @@ import { OwlModule } from 'ngx-owl-carousel';
         ProductDetailComponent,
         GeneralComponent,
         CartComponent
+    ],
+    providers: [
+        ProductDetailResolve
     ]
 })
 

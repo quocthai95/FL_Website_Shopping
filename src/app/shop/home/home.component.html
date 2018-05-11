@@ -99,23 +99,23 @@ _________________________________________________________ -->
             <div class="flip-container">
               <div class="flipper">
                 <div class="front">
-                  <a [routerLink]="['/category','detail']">
+                  <a [routerLink]="['/category', item.id]">
                     <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
-                  <a [routerLink]="['/category','detail']">
+                  <a [routerLink]="['/category', item.id]">
                     <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div>
-            <a [routerLink]="['/category','detail']" class="invisible">
+            <a [routerLink]="['/category', item.id]" class="invisible">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/category','detail']">{{item.description}}</a>
+                <a [routerLink]="['/category', item.id]">{{item.name}}</a>
               </h3>
               <p class="price">
                 <del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>

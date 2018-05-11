@@ -11,7 +11,7 @@ import { ShopModule } from './shop/shop.module';
 import { AppRouteModule } from './app-route.module';
 import { InitService } from './shared/init.service';
 import { HttpClientModule } from '@angular/common/http';
-import { OwlModule } from 'ngx-owl-carousel';
+import { ProductService } from './shared/product.service';
 
 @NgModule({
   declarations: [
@@ -22,10 +22,9 @@ import { OwlModule } from 'ngx-owl-carousel';
     HttpClientModule,
     CoreModule,
     ShopModule,
-    AppRouteModule,
-    OwlModule
+    AppRouteModule
   ],
-  providers: [InitService],
+  providers: [InitService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
