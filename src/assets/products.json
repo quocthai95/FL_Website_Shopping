@@ -1,5 +1,5 @@
-{
-    "hot": [
+
+    [
         {
             "id": 1,
             "img": ["assets/images/product1.jpg", "assets/images/product1_2.jpg"],
@@ -81,4 +81,3 @@
             "oldPrice": null
         }
     ]
-}

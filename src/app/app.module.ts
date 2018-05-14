@@ -12,6 +12,8 @@ import { AppRouteModule } from './app-route.module';
 import { InitService } from './shared/init.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './shared/product.service';
+import { StoreModule } from '@ngrx/store';
+import { productReducer } from './store/product.reducer';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { ProductService } from './shared/product.service';
     HttpClientModule,
     CoreModule,
     ShopModule,
-    AppRouteModule
+    AppRouteModule,
+    StoreModule.forRoot({product: productReducer})
   ],
   providers: [InitService, ProductService],
   bootstrap: [AppComponent]

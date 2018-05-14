@@ -1,89 +1,23 @@
-export class ProductService {
-    products = [
-        {
-            'id': 1,
-            'img': ['assets/images/product1.jpg', 'assets/images/product1_2.jpg'],
-            'name': 'Fur coat with very but very very long name',
-            'sale': false,
-            'new': false,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        },
-        {
-            'id': 2,
-            'img': ['assets/images/product2.jpg', 'assets/images/product2_2.jpg'],
-            'name': 'White Blouse Armani',
-            'sale': true,
-            'new': true,
-            'gift': true,
-            'price': 143.00,
-            'oldPrice': 280
-        },
-        {
-            'id': 3,
-            'img': ['assets/images/product3.jpg', 'assets/images/product3_2.jpg'],
-            'name': 'Black Blouse Versace',
-            'sale': false,
-            'new': false,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        },
-        {
-            'id': 4,
-            'img': ['assets/images/product3.jpg', 'assets/images/product3_2.jpg'],
-            'name': 'Black Blouse Versace',
-            'sale': false,
-            'new': false,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        },
-        {
-            'id': 5,
-            'img': ['assets/images/product2.jpg', 'assets/images/product2_2.jpg'],
-            'name': 'White Blouse Armani',
-            'sale': false,
-            'new': true,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        },
-        {
-            'id': 6,
-            'img': ['assets/images/product1.jpg', 'assets/images/product1_2.jpg'],
-            'name': 'Fur coat with very but very very long name',
-            'sale': false,
-            'new': false,
-            'gift': true,
-            'price': 143.00,
-            'oldPrice': 200
-        },
-        {
-            'id': 7,
-            'img': ['assets/images/product3.jpg', 'assets/images/product3_2.jpg'],
-            'name': 'Black Blouse Versace',
-            'sale': false,
-            'new': false,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        },
-        {
-            'id': 8,
-            'img': ['assets/images/product3.jpg', 'assets/images/product3_2.jpg'],
-            'name': 'Black Blouse Versace',
-            'sale': false,
-            'new': false,
-            'gift': false,
-            'price': 143.00,
-            'oldPrice': null
-        }
-    ];
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ProductModel } from './product.model';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as ProductActions from '../store/product.action';
 
-    getProductId(id: number) {
-        return this.products[id - 1];
+@Injectable()
+export class ProductService implements OnInit {
+    constructor(private httpClient: HttpClient, private store: Store<{product: {products: ProductModel[]}}>) {}
+
+    getProductId(id: number)  {
+        return this.store.select(state => state.product.products[id - 1]);
+    }
+
+    ngOnInit() {
+    }
+
+    getProducts() {
+        return this.store.select('product');
     }
 }
 

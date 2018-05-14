@@ -2,7 +2,7 @@
 
   <div class="container">
     <div class="col-md-12">
-      <owl-carousel id="main-slider"[options]="{items: 1, autoplay: true, dots: true, navigation: true}"
+      <owl-carousel id="main-slider" [options]="{items: 1, autoplay: true, dots: true, navigation: true}"
       [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']" >
         <div class="item">
           <img src="assets/images/main-slider1.jpg" alt="" class="img-responsive">
@@ -92,9 +92,9 @@ _________________________________________________________ -->
 
     <div class="container">
       <owl-carousel class="product-slider" [options]="{items: 6, dots: true, navigation: true}"
-      [items]="products.hot" 
+      [items]="(products | async).products" 
       [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
-        <div class="item" *ngFor="let item of products.hot">
+        <div class="item" *ngFor="let item of (products | async).products">
           <div class="product">
             <div class="flip-container">
               <div class="flipper">
