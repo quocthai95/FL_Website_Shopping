@@ -1,6 +1,10 @@
 import * as ProductActions from '../store/product.action';
+import {ProductModel } from '../shared/product.model';
 
-const initialState = {
+export interface State {
+    products: ProductModel[];
+}
+const initialState: State = {
     products: []
 };
 

@@ -1,6 +1,18 @@
+import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
+import * as fromAppReducer from '../store/app.reducer';
+import * as ProductActions from '../store/product.action';
+import { Injectable } from '@angular/core';
+
+
 declare let jQuery: any;
 
+@Injectable()
 export class InitService {
+
+  constructor(private httpClient: HttpClient, private store: Store<fromAppReducer.AppState>) {
+    this.store.dispatch(new ProductActions.GetDataFromServer());
+  }
 
   setupStuff() {
     (function ($) {

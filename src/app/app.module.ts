@@ -11,9 +11,10 @@ import { ShopModule } from './shop/shop.module';
 import { AppRouteModule } from './app-route.module';
 import { InitService } from './shared/init.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from './shared/product.service';
 import { StoreModule } from '@ngrx/store';
-import { productReducer } from './store/product.reducer';
+import { reducer } from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffect } from './store/product.effect';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,10 @@ import { productReducer } from './store/product.reducer';
     CoreModule,
     ShopModule,
     AppRouteModule,
-    StoreModule.forRoot({product: productReducer})
+    StoreModule.forRoot(reducer),
+    EffectsModule.forRoot([ProductEffect])
   ],
-  providers: [InitService, ProductService],
+  providers: [InitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
