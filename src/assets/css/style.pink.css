@@ -147,37 +147,37 @@ h1 {
 .navbar #basket-overview {
   padding: 0;
 }
-#hot h2 {
+.hot h2 {
   text-transform: uppercase;
   font-size: 36px;
   color: #dd8bc1;
   font-weight: 100;
   text-align: center;
 }
-#hot .product-slider {
+.hot .product-slider {
   margin-bottom: 20px;
 }
-#hot .product-slider:before,
-#hot .product-slider:after {
+.hot .product-slider:before,
+.hot .product-slider:after {
   content: " ";
   display: table;
 }
-#hot .product-slider:after {
+.hot .product-slider:after {
   clear: both;
 }
-#hot .product-slider .item {
+.hot .product-slider .item {
   margin: 0 25px;
   visibility: hidden;
 }
-#hot .product-slider .owl-controls {
+.hot .product-slider .owl-controls {
   position: relative;
   top: -30px;
 }
-#hot .product-slider .owl-controls .owl-buttons {
+.hot .product-slider .owl-controls .owl-buttons {
   display: none;
 }
-#hot .product-slider .owl-controls .owl-page.active span,
-#hot .product-slider .owl-controls.clickable .owl-page:hover span {
+.hot .product-slider .owl-controls .owl-page.active span,
+.hot .product-slider .owl-controls.clickable .owl-page:hover span {
   background: #dd8bc1;
 }
 #advantages {
