@@ -197,8 +197,7 @@ _________________________________________________________ -->
                       <p class="price"><del *ngIf="(product | async)?.oldPrice">${{(product | async)?.oldPrice}}</del> ${{(product | async)?.price}}</p>
 
                       <p class="text-center buttons">
-                          <a [routerLink]="['/cart']" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-                          <a [routerLink]="['/cart']" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+                          <a (click)="addCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
                       </p>
 
 

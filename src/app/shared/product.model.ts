@@ -8,4 +8,5 @@ export interface ProductModel {
     new: boolean;
     gift: boolean;
     oldPrice: number;
+    quantity: number;
 }

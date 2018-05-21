@@ -7,6 +7,7 @@ import { CategoryComponent } from './shop/category/category.component';
 import { ProductDetailComponent } from './shop/category/product-detail/product-detail.component';
 import { GeneralComponent } from './shop/category/general/general.component';
 import { CartComponent } from './shop/cart/cart.component';
+import { AboutComponent } from './shop/about/about.component';
 // import { ProductDetailResolve } from './shared/productDetail.resolve';
 
 const appRoutes = [
@@ -17,6 +18,7 @@ const appRoutes = [
         {path: ':id', component: ProductDetailComponent}
     ]},
     {path: 'cart', component: CartComponent},
+    {path: 'aboutus', component: AboutComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
 

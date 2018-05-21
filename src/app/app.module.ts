@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
@@ -15,6 +13,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffect } from './store/product.effect';
+
+
 
 @NgModule({
   declarations: [

@@ -17,9 +17,9 @@
         <form method="post" action="checkout1.html">
 
           <h1>Shopping cart</h1>
-          <p class="text-muted">You currently have 3 item(s) in your cart.</p>
+          <p class="text-muted">You currently have {{productOrder?productOrder.length:0}} item(s) in your cart.</p>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table" *ngIf="productOrder; else noLocalCart">
               <thead>
                 <tr>
                   <th colspan="2">Product</th>
@@ -30,56 +30,38 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let item of productOrder">
                   <td>
                     <a href="#">
-                      <img src="assets/images/detailsquare.jpg" alt="White Blouse Armani">
+                      <img src="{{item.img[0]}}" alt="{{item.name}}">
                     </a>
                   </td>
                   <td>
-                    <a href="#">White Blouse Armani</a>
+                    <a href="#">{{item.name}}</a>
                   </td>
                   <td>
-                    <input type="number" value="2" class="form-control">
+                    <input type="number" min="0" class="form-control" (ngModelChange)="checkTotalPrice()" name="quantity" [(ngModel)]="item.quantity">
                   </td>
-                  <td>$123.00</td>
+                  <td>${{item.price}}</td>
                   <td>$0.00</td>
-                  <td>$246.00</td>
+                  <td>${{item.price*item.quantity}}</td>
                   <td>
                     <a href="#">
                       <i class="fa fa-trash-o"></i>
                     </a>
                   </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a href="#">
-                      <img src="assets/images/basketsquare.jpg" alt="Black Blouse Armani">
-                    </a>
-                  </td>
-                  <td>
-                    <a href="#">Black Blouse Armani</a>
-                  </td>
-                  <td>
-                    <input type="number" value="1" class="form-control">
-                  </td>
-                  <td>$200.00</td>
-                  <td>$0.00</td>
-                  <td>$200.00</td>
-                  <td>
-                    <a href="#">
-                      <i class="fa fa-trash-o"></i>
-                    </a>
-                  </td>
-                </tr>
+                </tr>              
               </tbody>
               <tfoot>
                 <tr>
                   <th colspan="5">Total</th>
-                  <th colspan="2">$446.00</th>
+                  <th colspan="2">${{totalPrice}}</th>
                 </tr>
               </tfoot>
             </table>
+            <ng-template #noLocalCart>
+              <h1 style="color: red;text-align: center">No Order Found</h1>
+            </ng-template>
 
           </div>
           <!-- /.table-responsive -->
