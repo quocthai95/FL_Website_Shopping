@@ -5,7 +5,7 @@
 
       <ul class="breadcrumb">
         <li>
-          <a href="#">Home</a>
+          <a [routerLink]="['/home']">Home</a>
         </li>
         <li>Ladies</li>
       </ul>
@@ -68,7 +68,7 @@
               <h3>
                 <a [routerLink]="['/category', item._id]">Fur coat with very but very very long name</a>
               </h3>
-              <p class="price"><del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>
+              <p class="price"><del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{item.price | currency:'USD':'symbol':'1.2-2'}}</p>
               <p class="buttons">
                 <a [routerLink]="['/category', item._id]" class="btn btn-default">View detail</a>
                 <a [routerLink]="['/cart']" class="btn btn-primary">

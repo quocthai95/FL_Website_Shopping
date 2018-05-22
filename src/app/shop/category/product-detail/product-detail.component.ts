@@ -9,6 +9,7 @@ import * as fromProductReducer from '../../../store/product.reducer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/first';
 import { map } from 'rxjs/operator/map';
+import { SharedDataService } from '../../../shared/shared-data.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
   product:  Observable<ProductModel>;
 
   constructor(private route: ActivatedRoute, private router: Router, private initService: InitService,
-    private store: Store<fromAppReducer.AppState>) { }
+    private store: Store<fromAppReducer.AppState>, private sharedDataService: SharedDataService) { }
 
   ngOnInit() {
     this.initService.setupStuff();
@@ -43,6 +44,7 @@ export class ProductDetailComponent implements OnInit {
     this.product.first().subscribe((item: ProductModel) => {
       this.saveCartDataToLocal(item);
     });
+    this.sharedDataService.cartItemsObs.next(JSON.parse(localStorage.getItem('productOrder')).length);
     this.router.navigate(['/cart']);
   }
 

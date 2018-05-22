@@ -118,7 +118,7 @@ _________________________________________________________ -->
                 <a [routerLink]="['/category', item._id]">{{item.name}}</a>
               </h3>
               <p class="price">
-                <del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>
+                <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
             </div>
             <!-- /.text -->
 
@@ -194,7 +194,7 @@ _________________________________________________________ -->
               <a [routerLink]="['/category', item._id]">{{item.name}}</a>
             </h3>
             <p class="price">
-              <del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>
+              <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
           </div>
           <!-- /.text -->
 
@@ -270,7 +270,7 @@ _________________________________________________________ -->
               <a [routerLink]="['/category', item._id]">{{item.name}}</a>
             </h3>
             <p class="price">
-              <del *ngIf="item.oldPrice">${{item.oldPrice}}</del> ${{item.price}}</p>
+              <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
           </div>
           <!-- /.text -->
 

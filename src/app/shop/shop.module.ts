@@ -10,6 +10,10 @@ import { CartComponent } from './cart/cart.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AboutComponent } from './about/about.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { CheckoutAddressComponent } from './cart/checkout-address/checkout-address.component';
+import { CheckoutOrderComponent } from './cart/checkout-order/checkout-order.component';
+import { CheckoutOrderReviewComponent } from './cart/checkout-order-review/checkout-order-review.component';
 
 
 @NgModule({
@@ -19,14 +23,18 @@ import { AboutComponent } from './about/about.component';
         ProductDetailComponent,
         GeneralComponent,
         CartComponent,
-        AboutComponent
+        AboutComponent,
+        CheckoutAddressComponent,
+        CheckoutOrderComponent,
+        CheckoutOrderReviewComponent
     ],
     imports: [
         CommonModule,
         FormsModule,
         RouterModule,
         OwlModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        ConfirmationPopoverModule.forRoot()
     ],
     exports: [
         HomeComponent,

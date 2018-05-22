@@ -3,7 +3,7 @@
 
       <div class="col-md-12">
           <ul class="breadcrumb">
-              <li><a href="#">Home</a>
+              <li><a [routerLink]="['/home']">Home</a>
               </li>
               <li><a href="#">Ladies</a>
               </li>
@@ -194,7 +194,7 @@ _________________________________________________________ -->
                       <h1 class="text-center">{{(product | async)?.name}}</h1>
                       <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
                       </p>
-                      <p class="price"><del *ngIf="(product | async)?.oldPrice">${{(product | async)?.oldPrice}}</del> ${{(product | async)?.price}}</p>
+                      <p class="price"><del *ngIf="(product | async)?.oldPrice">{{(product | async)?.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{(product | async)?.price | currency:'USD':'symbol':'1.2-2'}}</p>
 
                       <p class="text-center buttons">
                           <a (click)="addCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 

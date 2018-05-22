@@ -8,6 +8,9 @@ import { ProductDetailComponent } from './shop/category/product-detail/product-d
 import { GeneralComponent } from './shop/category/general/general.component';
 import { CartComponent } from './shop/cart/cart.component';
 import { AboutComponent } from './shop/about/about.component';
+import { CheckoutOrderComponent } from './shop/cart/checkout-order/checkout-order.component';
+import { CheckoutAddressComponent } from './shop/cart/checkout-address/checkout-address.component';
+import { CheckoutOrderReviewComponent } from './shop/cart/checkout-order-review/checkout-order-review.component';
 // import { ProductDetailResolve } from './shared/productDetail.resolve';
 
 const appRoutes = [
@@ -17,7 +20,12 @@ const appRoutes = [
         {path: 'general', component: GeneralComponent},
         {path: ':id', component: ProductDetailComponent}
     ]},
-    {path: 'cart', component: CartComponent},
+    {path: 'cart', component: CartComponent, children: [
+        {path: '', redirectTo: 'checkout-order', pathMatch: 'full'},
+        {path: 'checkout-order', component: CheckoutOrderComponent},
+        {path: 'checkout-delivery', component: CheckoutAddressComponent},
+        {path: 'checkout-review', component: CheckoutOrderReviewComponent}
+    ]},
     {path: 'aboutus', component: AboutComponent},
     {path: '**', component: PageNotFoundComponent}
 ];

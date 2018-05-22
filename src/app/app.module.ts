@@ -13,12 +13,15 @@ import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffect } from './store/product.effect';
+import { ScrollTopComponent } from './others/scroll-top/scroll-top.component';
+import { SharedDataService } from './shared/shared-data.service';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ScrollTopComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { ProductEffect } from './store/product.effect';
     StoreModule.forRoot(reducer),
     EffectsModule.forRoot([ProductEffect])
   ],
-  providers: [InitService],
+  providers: [InitService, SharedDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
