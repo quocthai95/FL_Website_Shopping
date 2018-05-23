@@ -11,22 +11,37 @@ import { AboutComponent } from './shop/about/about.component';
 import { CheckoutOrderComponent } from './shop/cart/checkout-order/checkout-order.component';
 import { CheckoutAddressComponent } from './shop/cart/checkout-address/checkout-address.component';
 import { CheckoutOrderReviewComponent } from './shop/cart/checkout-order-review/checkout-order-review.component';
-// import { ProductDetailResolve } from './shared/productDetail.resolve';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ShopComponent } from './shop/shop.component';
+import { ProductManagementComponent } from './admin/dashboard/product-management/product-management.component';
+import { LoginComponent } from './admin/login/login.component';
+import { AuthGuard } from './admin/auth-guard.service';
 
 const appRoutes = [
-    {path: '', redirectTo: 'home', pathMatch: 'full'},
-    {path: 'home', component: HomeComponent},
-    {path: 'category', component: CategoryComponent, children: [
-        {path: 'general', component: GeneralComponent},
-        {path: ':id', component: ProductDetailComponent}
+    {path: '', redirectTo: 'shop', pathMatch: 'full'},
+    {path: 'shop', component: ShopComponent, children: [
+        {path: '', redirectTo: 'home', pathMatch: 'full'},
+        {path: 'home', component: HomeComponent},
+        {path: 'category', component: CategoryComponent, children: [
+            {path: 'general', component: GeneralComponent},
+            {path: ':id', component: ProductDetailComponent}
+        ]},
+        {path: 'cart', component: CartComponent, children: [
+            {path: '', redirectTo: 'checkout-order', pathMatch: 'full'},
+            {path: 'checkout-order', component: CheckoutOrderComponent},
+            {path: 'checkout-delivery', component: CheckoutAddressComponent},
+            {path: 'checkout-review', component: CheckoutOrderReviewComponent}
+        ]},
+        {path: 'aboutus', component: AboutComponent}
     ]},
-    {path: 'cart', component: CartComponent, children: [
-        {path: '', redirectTo: 'checkout-order', pathMatch: 'full'},
-        {path: 'checkout-order', component: CheckoutOrderComponent},
-        {path: 'checkout-delivery', component: CheckoutAddressComponent},
-        {path: 'checkout-review', component: CheckoutOrderReviewComponent}
+    {path: 'admin', children: [
+        {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+        {path: 'login', component: LoginComponent},
+        {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
+            {path: '', redirectTo: 'product-management', pathMatch: 'full'},
+            {path: 'product-management', component: ProductManagementComponent}
+        ]}
     ]},
-    {path: 'aboutus', component: AboutComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
 

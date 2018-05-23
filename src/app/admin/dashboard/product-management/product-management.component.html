@@ -1,0 +1,42 @@
+<div>
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Data Table</strong>
+          </div>
+          <div class="card-body">
+            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Old Price</th>
+                  <th>Sale</th>
+                  <th>New</th>
+                  <th>Gift</th>
+                  <th>Images</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of (products | async).products">
+                      <th>{{item.name}}</th>
+                      <th>{{item.price | currency:'USD':'symbol':'1.2-2'}}</th>
+                      <th>{{item.oldPrice?item.oldPrice:0 | currency:'USD':'symbol':'1.2-2'}}</th>
+                      <th>{{item.sale}}</th>
+                      <th>{{item.new}}</th>
+                      <th>{{item.gift}}</th>
+                      <th><ks-modal-gallery [plainGalleryConfig]="plainGalleryRow" [modalImages]="createImgView(item.img)" ></ks-modal-gallery></th>
+                      <th><button class="btn btn-info" style="color:white">Edit</button></th>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>

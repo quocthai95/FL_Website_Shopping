@@ -14,10 +14,13 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { CheckoutAddressComponent } from './cart/checkout-address/checkout-address.component';
 import { CheckoutOrderComponent } from './cart/checkout-order/checkout-order.component';
 import { CheckoutOrderReviewComponent } from './cart/checkout-order-review/checkout-order-review.component';
+import { ShopComponent } from './shop.component';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
     declarations: [
+        ShopComponent,
         HomeComponent,
         CategoryComponent,
         ProductDetailComponent,
@@ -33,10 +36,12 @@ import { CheckoutOrderReviewComponent } from './cart/checkout-order-review/check
         FormsModule,
         RouterModule,
         OwlModule,
+        CoreModule,
         NgxPaginationModule,
         ConfirmationPopoverModule.forRoot()
     ],
     exports: [
+        ShopComponent,
         HomeComponent,
         CategoryComponent,
         ProductDetailComponent,

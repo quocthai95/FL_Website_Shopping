@@ -45,7 +45,7 @@ export class ProductDetailComponent implements OnInit {
       this.saveCartDataToLocal(item);
     });
     this.sharedDataService.cartItemsObs.next(JSON.parse(localStorage.getItem('productOrder')).length);
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/shop/cart']);
   }
 
 }

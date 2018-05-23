@@ -99,23 +99,23 @@ _________________________________________________________ -->
             <div class="flip-container">
               <div class="flipper">
                 <div class="front">
-                  <a [routerLink]="['/category', item._id]">
+                  <a [routerLink]="['/shop/category', item._id]">
                     <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
-                  <a [routerLink]="['/category', item._id]">
+                  <a [routerLink]="['/shop/category', item._id]">
                     <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div>
-            <a [routerLink]="['/category', item._id]" class="invisible">
+            <a [routerLink]="['/shop/category', item._id]" class="invisible">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/category', item._id]">{{item.name}}</a>
+                <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
               </h3>
               <p class="price">
                 <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
@@ -175,23 +175,23 @@ _________________________________________________________ -->
           <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <a [routerLink]="['/category', item._id]">
+                <a [routerLink]="['/shop/category', item._id]">
                   <img src="{{item.img[0]}}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="back">
-                <a [routerLink]="['/category', item._id]">
+                <a [routerLink]="['/shop/category', item._id]">
                   <img src="{{item.img[1]}}" alt="" class="img-responsive">
                 </a>
               </div>
             </div>
           </div>
-          <a [routerLink]="['/category', item._id]" class="invisible">
+          <a [routerLink]="['/shop/category', item._id]" class="invisible">
             <img src="{{item.img[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/category', item._id]">{{item.name}}</a>
+              <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
             </h3>
             <p class="price">
               <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
@@ -251,23 +251,23 @@ _________________________________________________________ -->
           <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <a [routerLink]="['/category', item._id]">
+                <a [routerLink]="['/shop/category', item._id]">
                   <img src="{{item.img[0]}}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="back">
-                <a [routerLink]="['/category', item._id]">
+                <a [routerLink]="['/shop/category', item._id]">
                   <img src="{{item.img[1]}}" alt="" class="img-responsive">
                 </a>
               </div>
             </div>
           </div>
-          <a [routerLink]="['/category', item._id]" class="invisible">
+          <a [routerLink]="['/shop/category', item._id]" class="invisible">
             <img src="{{item.img[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/category', item._id]">{{item.name}}</a>
+              <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
             </h3>
             <p class="price">
               <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>

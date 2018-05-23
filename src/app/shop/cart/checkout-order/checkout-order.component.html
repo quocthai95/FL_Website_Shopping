@@ -20,12 +20,12 @@
           <tbody>
             <tr *ngFor="let item of productOrder; let i = index">
               <td>
-                <a [routerLink]="['/category', item._id]">
+                <a [routerLink]="['/shop/category', item._id]">
                   <img src="{{item.img[0]}}" alt="{{item.name}}">
                 </a>
               </td>
               <td>
-                <a [routerLink]="['/category', item._id]">{{item.name}}</a>
+                <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
               </td>
               <td>
                 <input type="number" min="0" class="form-control" (keyup)="checkTotalPrice()" [name]="item.name" [(ngModel)]="item.quantity">
@@ -61,7 +61,7 @@
 
       <div class="box-footer">
         <div class="pull-left">
-          <a [routerLink]="['/category', 'general']" class="btn btn-default">
+          <a [routerLink]="['/shop/category', 'general']" class="btn btn-default">
             <i class="fa fa-chevron-left"></i> Continue shopping</a>
         </div>
         <div class="pull-right">

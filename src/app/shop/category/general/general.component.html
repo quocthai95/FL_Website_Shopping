@@ -5,7 +5,7 @@
 
       <ul class="breadcrumb">
         <li>
-          <a [routerLink]="['/home']">Home</a>
+          <a [routerLink]="['/shop/home']">Home</a>
         </li>
         <li>Ladies</li>
       </ul>
@@ -50,28 +50,28 @@
             <div class="flip-container">
               <div class="flipper">
                 <div class="front">
-                  <a [routerLink]="['/category', item._id]">
+                  <a [routerLink]="['/shop/category', item._id]">
                     <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
-                  <a [routerLink]="['/category', item._id]">
+                  <a [routerLink]="['/shop/category', item._id]">
                     <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div>
-            <a [routerLink]="['/category', item._id]" class="invisible">
+            <a [routerLink]="['/shop/category', item._id]" class="invisible">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/category', item._id]">Fur coat with very but very very long name</a>
+                <a [routerLink]="['/shop/category', item._id]">Fur coat with very but very very long name</a>
               </h3>
               <p class="price"><del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{item.price | currency:'USD':'symbol':'1.2-2'}}</p>
               <p class="buttons">
-                <a [routerLink]="['/category', item._id]" class="btn btn-default">View detail</a>
-                <a [routerLink]="['/cart']" class="btn btn-primary">
+                <a [routerLink]="['/shop/category', item._id]" class="btn btn-default">View detail</a>
+                <a [routerLink]="['/shop/cart']" class="btn btn-primary">
                   <i class="fa fa-shopping-cart"></i>Add to cart</a>
               </p>
             </div>
