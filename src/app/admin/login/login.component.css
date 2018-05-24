@@ -43,3 +43,9 @@
 .form button:hover,.form button:active,.form button:focus {
   background: #43A047;
 }
+
+.error-message {
+  color: red;
+  padding: 1rem;
+  font-weight: bold;
+}

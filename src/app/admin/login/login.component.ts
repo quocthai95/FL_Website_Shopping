@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
   username: string;
   password: string;
+  errMess = null;
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -20,7 +21,10 @@ export class LoginComponent implements OnInit {
   checkLogin() {
     if (this.loginForm.value.username === 'nqthai95' && this.loginForm.value.password === '123') {
       this.auth.isAuth = true;
+      this.errMess = null;
+      this.router.navigate(['admin/dashboard']);
+    } else {
+      this.errMess = 'Wrong Account or Password';
     }
-    this.router.navigate(['admin/dashboard']);
   }
 }

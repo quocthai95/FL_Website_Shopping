@@ -9,6 +9,8 @@ import {ModalGalleryModule} from 'angular-modal-gallery';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { AuthGuard } from './auth-guard.service';
         RouterModule,
         ConfirmationPopoverModule.forRoot(),
         ModalGalleryModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule
     ],
     declarations: [LoginComponent, DashboardComponent, ProductManagementComponent],
     exports: [

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/observable';
 import * as fromAppReducer from '../../../store/app.reducer';
 import * as fromProductReducer from '../../../store/product.reducer';
 import { InitService } from '../../../shared/init.service';
 import { Image, PlainGalleryConfig, PlainGalleryStrategy, LineLayout } from 'angular-modal-gallery';
+import { NgForm } from '@angular/forms';
+import { ProductModel } from '../../../shared/product.model';
 
 @Component({
   selector: 'app-product-management',
@@ -17,6 +19,29 @@ export class ProductManagementComponent implements OnInit {
   plainGalleryRow: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.ROW,
     layout: new LineLayout({ width: '40px', height: '40px' }, { length: 5, wrap: true }, 'flex-start')
+  };
+  @ViewChild('f') createForm: NgForm;
+  @ViewChild('ef') editForm: NgForm;
+
+  newProduct = {
+    name: null,
+    price: null,
+    oldPrice: null,
+    sale: false,
+    gift: false,
+    new: false
+  };
+
+  editProductModel: ProductModel = {
+    _id: null,
+    name: null,
+    price: null,
+    oldPrice: null,
+    new: null,
+    sale: null,
+    gift: null,
+    img: [],
+    quantity: null
   }
 
   ngOnInit() {
@@ -34,6 +59,19 @@ export class ProductManagementComponent implements OnInit {
       ));
     });
     return imgArr;
+  }
+
+  createNewProduct(f) {
+    console.log(this.createForm);
+    console.log(this.newProduct);
+  }
+
+  editProduct() {
+    console.log(this.editForm);
+  }
+
+  returnEditProduct(item) {
+    this.editProductModel = item;
   }
 
 }
