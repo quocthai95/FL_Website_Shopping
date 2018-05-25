@@ -3,8 +3,14 @@
 
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            <button class="btn btn-primary" style="color:white" data-toggle="modal" data-target="#createNew">Create New Product</button>
+          <div class="card-header row">
+            <div class="col-xs-4">
+                <button class="btn btn-primary" style="color:white" data-toggle="modal" data-target="#createNew">Create New Product</button>
+            </div>
+            <div class="col-xs-8">
+              <input type="text">
+              <button class="btn btn-info" style="color:white">Search</button>
+            </div> 
           </div>
           <div class="card-body">
             <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -82,13 +88,22 @@
                       <div class="col-xs-8"><mat-slide-toggle name="gift" [color]="'primary'"  [(ngModel)]="newProduct.gift"></mat-slide-toggle></div>
                   </div>
               </div>
+              <div class="row form-pad flex-center">
+                  <div class="col-xs-12">
+                      <label class="col-xs-5 label-text">Images</label>
+                      <input type="file"  class="col-xs-7" multiple name="images" id="newImages" (change)="encodeImg()" />
+                  </div>
+                  <div class="col-xs-12" *ngIf="newProduct.img.length > 0">
+                    <img [src]="img" alt="Image" *ngFor="let img of newProduct.img" height="40px" width="40px" style="padding-right: 1rem">
+                  </div>
+              </div>
               <div class="form-pad" style="text-align: center">
                   <button class="btn btn-primary btn-xs" type="submit" style="color: white">Create</button>
               </div> 
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="f.reset()">Close</button>
           </div>
         </div>
       </div>
@@ -133,8 +148,23 @@
                       <div class="col-xs-8"><mat-slide-toggle name="gift" [color]="'primary'"  [(ngModel)]="editProductModel.gift"></mat-slide-toggle></div>
                   </div>
               </div>
+              <div class="row form-pad flex-center">
+                  <div class="col-xs-12">
+                      <label class="col-xs-5 label-text">Images</label>
+                      <input type="file"  class="col-xs-7" multiple name="images" id="newImages" (change)="encodeImg()" />
+                  </div>
+                  <div class="col-xs-12 row" *ngIf="editProductModel.img.length > 0">
+                    <div mwlConfirmationPopover
+                    [popoverClass]="'text-center-imp'"
+                    [popoverTitle]="'Confirmation'"
+                    [popoverMessage]="'Do you want to delete this image?'"
+                    placement="top" class="tag-remove col-xs-3" *ngFor="let img of editProductModel.img" >
+                    <img [src]="img" alt="Image" height="40px" width="40px">
+                  </div>
+                  </div>
+              </div>
               <div class="form-pad" style="text-align: center">
-                  <button class="btn btn-primary btn-xs" type="submit" style="color: white">Create</button>
+                  <button class="btn btn-primary btn-xs" type="submit" style="color: white">Save</button>
               </div> 
             </form>
           </div>

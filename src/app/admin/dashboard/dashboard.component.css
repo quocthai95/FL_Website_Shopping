@@ -2275,3 +2275,19 @@ input::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
 }
+.tag-remove:after {
+  content: 'x'; 
+  color: red;
+  position: absolute;
+  top: -0.7rem;
+  right: 2.7rem;
+  font-weight: 300;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  pointer-events: all;
+}
+
+.tag-remove {
+  padding: 0;
+  pointer-events: none;
+}

@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   cartItems = 0;
+  searchText: string;
   subscription: Subscription;
   constructor(private sharedDataService: SharedDataService) { }
 

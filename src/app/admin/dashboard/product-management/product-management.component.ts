@@ -29,7 +29,8 @@ export class ProductManagementComponent implements OnInit {
     oldPrice: null,
     sale: false,
     gift: false,
-    new: false
+    new: false,
+    img: []
   };
 
   editProductModel: ProductModel = {
@@ -72,6 +73,36 @@ export class ProductManagementComponent implements OnInit {
 
   returnEditProduct(item) {
     this.editProductModel = item;
+  }
+
+  async encodeImg() {
+    this.newProduct.img = [];
+    const imgArr = (<HTMLInputElement>document.getElementById('newImages')).files;
+    for (let i = 0; i < imgArr.length; i++) {
+      const base64 = await this.imgToBase64(imgArr[i]);
+      this.newProduct.img.push(base64);
+    }
+  }
+
+  imgToBase64(img) {
+    const reader = new FileReader();
+    return new Promise(
+      (resolve, reject) => {
+        reader.readAsDataURL(img);
+        reader.onloadend = function() {
+          resolve(reader.result);
+        };
+
+        reader.onerror = function() {
+          reader.abort();
+          reject(new DOMException('Failed to read Image'));
+        }
+      }
+    );
+  }
+
+  alert(c) {
+  console.log(c);
   }
 
 }
