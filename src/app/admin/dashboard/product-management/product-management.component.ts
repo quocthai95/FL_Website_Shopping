@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import * as fromAppReducer from '../../../store/app.reducer';
 import * as fromProductReducer from '../../../store/product.reducer';
 import { InitService } from '../../../shared/init.service';
@@ -40,7 +40,7 @@ export class ProductManagementComponent implements OnInit {
     oldPrice: null,
     new: null,
     sale: null,
-    gift: null,
+    hot: null,
     img: [],
     quantity: null
   }
@@ -95,7 +95,7 @@ export class ProductManagementComponent implements OnInit {
 
         reader.onerror = function() {
           reader.abort();
-          reject(new DOMException('Failed to read Image'));
+          reject('Failed to read Image');
         }
       }
     );

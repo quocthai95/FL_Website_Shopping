@@ -17,6 +17,7 @@ import { CheckoutOrderReviewComponent } from './cart/checkout-order-review/check
 import { ShopComponent } from './shop.component';
 import { CoreModule } from '../core/core.module';
 import { SearchProductComponent } from './search-product/search-product.component';
+import { CompletedOrderComponent } from './cart/completed-order/completed-order.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SearchProductComponent } from './search-product/search-product.componen
         CheckoutAddressComponent,
         CheckoutOrderComponent,
         CheckoutOrderReviewComponent,
-        SearchProductComponent
+        SearchProductComponent,
+        CompletedOrderComponent
     ],
     imports: [
         CommonModule,
@@ -43,14 +45,6 @@ import { SearchProductComponent } from './search-product/search-product.componen
         ConfirmationPopoverModule.forRoot()
     ],
     exports: [
-        ShopComponent,
-        HomeComponent,
-        CategoryComponent,
-        ProductDetailComponent,
-        GeneralComponent,
-        CartComponent,
-        AboutComponent,
-        SearchProductComponent
     ],
     providers: [
     ]

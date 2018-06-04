@@ -47,7 +47,7 @@
 
         <div class="col-md-3 col-sm-4" *ngFor="let item of (listProduct | async).products | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage} ">
           <div class="product">
-            <div class="flip-container">
+            <!-- <div class="flip-container">
               <div class="flipper">
                 <div class="front">
                   <a [routerLink]="['/shop/category', item._id]">
@@ -60,8 +60,8 @@
                   </a>
                 </div>
               </div>
-            </div>
-            <a [routerLink]="['/shop/category', item._id]" class="invisible">
+            </div> -->
+            <a [routerLink]="['/shop/category', item._id]" class="">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
@@ -87,8 +87,8 @@
             </div>
             <!-- /.ribbon -->
 
-            <div class="ribbon gift" *ngIf="item.gift">
-              <div class="theribbon">GIFT</div>
+            <div class="ribbon gift" *ngIf="item.hot">
+              <div class="theribbon">HOT</div>
               <div class="ribbon-background"></div>
             </div>
             <!-- /.ribbon -->

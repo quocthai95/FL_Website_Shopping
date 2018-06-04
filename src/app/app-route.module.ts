@@ -17,6 +17,7 @@ import { ProductManagementComponent } from './admin/dashboard/product-management
 import { LoginComponent } from './admin/login/login.component';
 import { AuthGuard } from './admin/auth-guard.service';
 import { SearchProductComponent } from './shop/search-product/search-product.component';
+import { CompletedOrderComponent } from './shop/cart/completed-order/completed-order.component';
 
 const appRoutes = [
     {path: '', redirectTo: 'shop', pathMatch: 'full'},
@@ -31,7 +32,8 @@ const appRoutes = [
             {path: '', redirectTo: 'checkout-order', pathMatch: 'full'},
             {path: 'checkout-order', component: CheckoutOrderComponent},
             {path: 'checkout-delivery', component: CheckoutAddressComponent},
-            {path: 'checkout-review', component: CheckoutOrderReviewComponent}
+            {path: 'checkout-review', component: CheckoutOrderReviewComponent},
+            {path: 'completed-order', component: CompletedOrderComponent}
         ]},
         {path: 'search', component: SearchProductComponent},
         {path: 'aboutus', component: AboutComponent}

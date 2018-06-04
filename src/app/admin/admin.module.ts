@@ -25,7 +25,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ],
     declarations: [LoginComponent, DashboardComponent, ProductManagementComponent],
     exports: [
-        LoginComponent, DashboardComponent, ProductManagementComponent
     ],
     providers: [AuthService, AuthGuard]
 })

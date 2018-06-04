@@ -6,7 +6,7 @@
             "name": "Fur coat with very but very very long name",
             "sale": false,
             "new": false,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1
@@ -17,7 +17,7 @@
             "name": "White Blouse Armani",
             "sale": true,
             "new": true,
-            "gift": true,
+            "hot": true,
             "price": 143.00,
             "oldPrice": 280,
             "quantity": 1
@@ -28,7 +28,7 @@
             "name": "Black Blouse Versace",
             "sale": false,
             "new": false,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1
@@ -39,7 +39,7 @@
             "name": "Black Blouse Versace",
             "sale": false,
             "new": false,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1
@@ -50,7 +50,7 @@
             "name": "White Blouse Armani",
             "sale": false,
             "new": true,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1
@@ -61,7 +61,7 @@
             "name": "Fur coat with very but very very long name",
             "sale": false,
             "new": false,
-            "gift": true,
+            "hot": true,
             "price": 143.00,
             "oldPrice": 200,
             "quantity": 1
@@ -72,7 +72,7 @@
             "name": "Black Blouse Versace",
             "sale": false,
             "new": false,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1
@@ -83,7 +83,7 @@
             "name": "Black Blouse Versace",
             "sale": false,
             "new": false,
-            "gift": false,
+            "hot": false,
             "price": 143.00,
             "oldPrice": null,
             "quantity": 1

@@ -34,9 +34,9 @@ _________________________________________________________ -->
             </div>
 
             <h3>
-              <a href="#">We love our customers</a>
+              <a >Khách hàng trên hết</a>
             </h3>
-            <p>We are known to provide best possible service ever</p>
+            <p>Niềm tin, uy tín của cửa hàng được đặt lên làm đầu</p>
           </div>
         </div>
 
@@ -47,9 +47,9 @@ _________________________________________________________ -->
             </div>
 
             <h3>
-              <a href="#">Best prices</a>
+              <a >Giá tốt nhất</a>
             </h3>
-            <p>You can check that the height of the boxes adjust when longer text like this one is used in one of them.</p>
+            <p>Luôn đem đến cho khách giá cả cạnh tranh, tốt nhất trên thị trường</p>
           </div>
         </div>
 
@@ -60,9 +60,9 @@ _________________________________________________________ -->
             </div>
 
             <h3>
-              <a href="#">100% satisfaction guaranteed</a>
+              <a >100% chất lượng</a>
             </h3>
-            <p>Free returns on everything for 3 months.</p>
+            <p>Đảm bảo chất lượng, xuất xứ của các sản phẩm</p>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ _________________________________________________________ -->
     <div class="box">
       <div class="container">
         <div class="col-md-12">
-          <h2>Hot this week</h2>
+          <h2>các sản phẩm bán chạy</h2>
         </div>
       </div>
     </div>
@@ -91,12 +91,12 @@ _________________________________________________________ -->
     
 
     <div class="container">
-      <owl-carousel class="product-slider" [options]="{items: 6, dots: true, navigation: true}"
+      <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
       [items]="(products | async).products" 
       [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
         <div class="item" *ngFor="let item of (products | async).products">
           <div class="product">
-            <div class="flip-container">
+            <!-- <div class="flip-container">
               <div class="flipper">
                 <div class="front">
                   <a [routerLink]="['/shop/category', item._id]">
@@ -109,8 +109,8 @@ _________________________________________________________ -->
                   </a>
                 </div>
               </div>
-            </div>
-            <a [routerLink]="['/shop/category', item._id]" class="invisible">
+            </div> -->
+            <a [routerLink]="['/shop/category', item._id]" class="">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
@@ -134,8 +134,8 @@ _________________________________________________________ -->
             </div>
             <!-- /.ribbon -->
 
-            <div class="ribbon gift" *ngIf="item.gift">
-              <div class="theribbon">GIFT</div>
+            <div class="ribbon gift" *ngIf="item.hot">
+              <div class="theribbon">HOT</div>
               <div class="ribbon-background"></div>
             </div>
             <!-- /.ribbon -->
@@ -159,7 +159,7 @@ _________________________________________________________ -->
   <div class="box">
     <div class="container">
       <div class="col-md-12">
-        <h2>Sale this week</h2>
+        <h2>các sản phẩm đang giảm giá</h2>
       </div>
     </div>
   </div>
@@ -167,12 +167,12 @@ _________________________________________________________ -->
   
 
   <div class="container">
-    <owl-carousel class="product-slider" [options]="{items: 6, dots: true, navigation: true}"
+    <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
     [items]="(products | async).products" 
     [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
       <div class="item" *ngFor="let item of (products | async).products">
         <div class="product">
-          <div class="flip-container">
+          <!-- <div class="flip-container">
             <div class="flipper">
               <div class="front">
                 <a [routerLink]="['/shop/category', item._id]">
@@ -185,8 +185,8 @@ _________________________________________________________ -->
                 </a>
               </div>
             </div>
-          </div>
-          <a [routerLink]="['/shop/category', item._id]" class="invisible">
+          </div> -->
+          <a [routerLink]="['/shop/category', item._id]" class="">
             <img src="{{item.img[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
@@ -210,8 +210,8 @@ _________________________________________________________ -->
           </div>
           <!-- /.ribbon -->
 
-          <div class="ribbon gift" *ngIf="item.gift">
-            <div class="theribbon">GIFT</div>
+          <div class="ribbon gift" *ngIf="item.hot">
+            <div class="theribbon">HOT</div>
             <div class="ribbon-background"></div>
           </div>
           <!-- /.ribbon -->
@@ -235,7 +235,7 @@ _________________________________________________________ -->
   <div class="box">
     <div class="container">
       <div class="col-md-12">
-        <h2>New this week</h2>
+        <h2>các sản phẩm mới về</h2>
       </div>
     </div>
   </div>
@@ -243,12 +243,12 @@ _________________________________________________________ -->
   
 
   <div class="container">
-    <owl-carousel class="product-slider" [options]="{items: 6, dots: true, navigation: true}"
+    <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
     [items]="(products | async).products" 
     [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
       <div class="item" *ngFor="let item of (products | async).products">
         <div class="product">
-          <div class="flip-container">
+          <!-- <div class="flip-container">
             <div class="flipper">
               <div class="front">
                 <a [routerLink]="['/shop/category', item._id]">
@@ -261,8 +261,8 @@ _________________________________________________________ -->
                 </a>
               </div>
             </div>
-          </div>
-          <a [routerLink]="['/shop/category', item._id]" class="invisible">
+          </div> -->
+          <a [routerLink]="['/shop/category', item._id]" class="">
             <img src="{{item.img[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
@@ -286,8 +286,8 @@ _________________________________________________________ -->
           </div>
           <!-- /.ribbon -->
 
-          <div class="ribbon gift" *ngIf="item.gift">
-            <div class="theribbon">GIFT</div>
+          <div class="ribbon gift" *ngIf="item.hot">
+            <div class="theribbon">HOT</div>
             <div class="ribbon-background"></div>
           </div>
           <!-- /.ribbon -->
@@ -303,74 +303,6 @@ _________________________________________________________ -->
 <!-- /#new -->
 
 <!-- *** NEW END *** -->
-
-  <!-- *** BLOG HOMEPAGE ***
-_________________________________________________________ -->
-
-  <div class="box text-center">
-    <div class="container">
-      <div class="col-md-12">
-        <h3 class="text-uppercase">From our blog</h3>
-
-        <p class="lead">What's new in the world of fashion?
-          <a href="blog.html">Check our blog!</a>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <div class="col-md-12" >
-
-      <div id="blog-homepage" class="row">
-        <div class="col-sm-6">
-          <div class="post">
-            <h4>
-              <a href="post.html">Fashion now</a>
-            </h4>
-            <p class="author-category">By
-              <a href="#">John Slim</a> in
-              <a href="">Fashion and style</a>
-            </p>
-            <hr>
-            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-              quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-              ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-            <p class="read-more">
-              <a href="post.html" class="btn btn-primary">Continue reading</a>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <div class="post">
-            <h4>
-              <a href="post.html">Who is who - example blog post</a>
-            </h4>
-            <p class="author-category">By
-              <a href="#">John Slim</a> in
-              <a href="">About Minimal</a>
-            </p>
-            <hr>
-            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-              quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-              ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-            <p class="read-more">
-              <a href="post.html" class="btn btn-primary">Continue reading</a>
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-      <!-- /#blog-homepage -->
-    </div>
-  </div>
-  <!-- /.container -->
-
-  <!-- *** BLOG HOMEPAGE END *** -->
-
 
 </div>
 <!-- /#content -->

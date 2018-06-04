@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 
 declare let jQuery: any;
-
+export const domainAPI = 'https://project-caocuong.herokuapp.com';
 @Injectable()
 export class InitService {
 
@@ -22,7 +22,7 @@ export class InitService {
       }
       $(function() {
           animations();
-          productDetailGallery(4000);
+          productDetailGallery(0);
           utils();
       });
       $(window).on('load', function() {
@@ -36,18 +36,18 @@ export class InitService {
       /* product detail gallery */
       function productDetailGallery(confDetailSwitch) {
           $('.thumb:first').addClass('active');
-          let timer = setInterval(autoSwitch, confDetailSwitch);
+          // let timer = setInterval(autoSwitch, confDetailSwitch);
           $('.thumb').click(function(e) {
         switchImage($(this));
-        clearInterval(timer);
-        timer = setInterval(autoSwitch, confDetailSwitch);
+        // clearInterval(timer);
+        // timer = setInterval(autoSwitch, confDetailSwitch);
         e.preventDefault();
           }
           );
           $('#mainImage').hover(function() {
-        clearInterval(timer);
+        // clearInterval(timer);
           }, function() {
-        timer = setInterval(autoSwitch, confDetailSwitch);
+        // timer = setInterval(autoSwitch, confDetailSwitch);
           });
           function autoSwitch() {
         let nextThumb = $('.thumb.active').closest('div').next('div').find('.thumb');

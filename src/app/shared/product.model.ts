@@ -6,7 +6,7 @@ export interface ProductModel {
     description?: string;
     sale: boolean;
     new: boolean;
-    gift: boolean;
+    hot: boolean;
     oldPrice: number;
     quantity: number;
 }

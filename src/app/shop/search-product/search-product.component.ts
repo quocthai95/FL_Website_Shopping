@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { InitService } from '../../shared/init.service';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import * as fromProductReducer from '../../store/product.reducer';
 import * as fromAppReducer from '../../store/app.reducer';
 import { ActivatedRoute, Params } from '@angular/router';

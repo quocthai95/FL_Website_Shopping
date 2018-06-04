@@ -20,8 +20,7 @@ import { FormsModule } from '@angular/forms';
     ],
     exports: [
         HeaderComponent,
-        FooterComponent,
-        PageNotFoundComponent
+        FooterComponent
     ]
 })
 
