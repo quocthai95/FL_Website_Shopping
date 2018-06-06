@@ -7,7 +7,9 @@ import { InitService } from '../../../shared/init.service';
 import { Image, PlainGalleryConfig, PlainGalleryStrategy, LineLayout } from 'angular-modal-gallery';
 import { NgForm } from '@angular/forms';
 import { ProductModel } from '../../../shared/product.model';
+import * as ProductActions from '../../../store/product.action';
 
+declare const $: any;
 @Component({
   selector: 'app-product-management',
   templateUrl: './product-management.component.html',
@@ -20,29 +22,36 @@ export class ProductManagementComponent implements OnInit {
     strategy: PlainGalleryStrategy.ROW,
     layout: new LineLayout({ width: '40px', height: '40px' }, { length: 5, wrap: true }, 'flex-start')
   };
-  @ViewChild('f') createForm: NgForm;
   @ViewChild('ef') editForm: NgForm;
 
-  newProduct = {
-    name: null,
+  newProduct: ProductModel = {
+    _id: null,
+    productId: null,
+    productName: null,
+    category: '',
     price: null,
-    oldPrice: null,
+    discount: null,
+    image: [],
+    description: [],
     sale: false,
-    gift: false,
     new: false,
-    img: []
+    hot: false,
+    amount: null
   };
 
   editProductModel: ProductModel = {
     _id: null,
-    name: null,
+    productId: null,
+    productName: null,
+    category: null,
     price: null,
-    oldPrice: null,
-    new: null,
+    discount: null,
+    image: [],
+    description: [],
     sale: null,
+    new: null,
     hot: null,
-    img: [],
-    quantity: null
+    amount: null
   }
 
   ngOnInit() {
@@ -62,9 +71,37 @@ export class ProductManagementComponent implements OnInit {
     return imgArr;
   }
 
-  createNewProduct(f) {
-    console.log(this.createForm);
-    console.log(this.newProduct);
+  createNewProduct() {
+    this.store.dispatch(new ProductActions.CreateNewProduct(this.newProduct));
+    this.clearForm();
+  }
+
+  clearForm() {
+    this.newProduct = {
+      _id: null,
+      productId: null,
+      productName: null,
+      category: '',
+      price: null,
+      discount: null,
+      image: [],
+      description: [],
+      sale: false,
+      new: false,
+      hot: false,
+      amount: null
+    };
+    (<HTMLInputElement>document.getElementById('newImages')).value = '';
+    $('#createNew').modal('hide');
+  }
+
+  validForm(item) {
+    if (item.category && item.productId && item.productName && item.price
+      && (item.image.length > 0) && (item.description[0] && item.description[1]) ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   editProduct() {
@@ -76,11 +113,11 @@ export class ProductManagementComponent implements OnInit {
   }
 
   async encodeImg() {
-    this.newProduct.img = [];
+    this.newProduct.image = [];
     const imgArr = (<HTMLInputElement>document.getElementById('newImages')).files;
     for (let i = 0; i < imgArr.length; i++) {
       const base64 = await this.imgToBase64(imgArr[i]);
-      this.newProduct.img.push(base64);
+      this.newProduct.image.push(base64);
     }
   }
 

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 
 declare let jQuery: any;
-export const domainAPI = 'https://project-caocuong.herokuapp.com';
+export const DOMAINAPI = 'https://project-caocuong.herokuapp.com/';
 @Injectable()
 export class InitService {
 

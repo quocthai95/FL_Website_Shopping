@@ -1,12 +1,14 @@
 export interface ProductModel {
     _id: number;
-    name: string;
+    productId: string;
+    productName: string;
+    category: string;
     price: number;
-    img: string[];
-    description?: string;
+    discount: number;
+    image: Array<any>;
+    description: string[];
     sale: boolean;
     new: boolean;
     hot: boolean;
-    oldPrice: number;
-    quantity: number;
+    amount: number;
 }
