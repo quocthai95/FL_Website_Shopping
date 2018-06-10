@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { InitService } from '../../shared/init.service';
+import { InitService, DOMAINAPI } from '../../shared/init.service';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../../shared/product.model';
 import { Observable } from 'rxjs/Observable';
@@ -13,14 +13,16 @@ import * as fromProductReducer from '../../store/product.reducer';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products: Observable<fromProductReducer.State>;
-
-  constructor(private initService: InitService,
-  private store: Store<fromAppReducer.AppState>) { }
+  hotProduct: Observable<Array<ProductModel>>;
+  saleProduct: Observable<Array<ProductModel>>;
+  newProduct: Observable<Array<ProductModel>>;
+  constructor(private initService: InitService, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.initService.setupStuff();
-    this.products = this.store.select('product');
+    // this.httpClient.get(DOMAINAPI + 'home', {
+    //   observe: 'body'
+    // }).subscribe()
   }
 
 }

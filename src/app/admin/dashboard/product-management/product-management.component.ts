@@ -3,11 +3,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromAppReducer from '../../../store/app.reducer';
 import * as fromProductReducer from '../../../store/product.reducer';
-import { InitService } from '../../../shared/init.service';
+import { InitService, DOMAINAPI } from '../../../shared/init.service';
 import { Image, PlainGalleryConfig, PlainGalleryStrategy, LineLayout } from 'angular-modal-gallery';
 import { NgForm } from '@angular/forms';
 import { ProductModel } from '../../../shared/product.model';
 import * as ProductActions from '../../../store/product.action';
+import { HttpClient } from '@angular/common/http';
 
 declare const $: any;
 @Component({
@@ -17,12 +18,16 @@ declare const $: any;
 })
 export class ProductManagementComponent implements OnInit {
   products: Observable<fromProductReducer.State>;
-  constructor(private store: Store<fromAppReducer.AppState>, private inItService: InitService) { }
+  searchProducts: Observable<fromProductReducer.State>;
+  constructor(private store: Store<fromAppReducer.AppState>, private inItService: InitService, private httpClient: HttpClient) { }
   plainGalleryRow: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.ROW,
     layout: new LineLayout({ width: '40px', height: '40px' }, { length: 5, wrap: true }, 'flex-start')
   };
-  @ViewChild('ef') editForm: NgForm;
+  currentPage = 1;
+  itemsPerPage = 8;
+  searchType = 'NAME';
+  searchText = '';
 
   newProduct: ProductModel = {
     _id: null,
@@ -52,10 +57,22 @@ export class ProductManagementComponent implements OnInit {
     new: null,
     hot: null,
     amount: null
-  }
+  };
 
   ngOnInit() {
     this.products = this.store.select('product');
+  }
+
+  searchProduct() {
+    if (this.searchType === 'NAME') {
+      this.httpClient.get(DOMAINAPI + 'product/search/' + this.searchText, {
+        observe: 'body'
+      }).subscribe(
+        (response: any) => {
+          this.searchProducts = response;
+        }
+      )
+    }
   }
 
   createImgView(item) {
@@ -71,28 +88,59 @@ export class ProductManagementComponent implements OnInit {
     return imgArr;
   }
 
-  createNewProduct() {
-    this.store.dispatch(new ProductActions.CreateNewProduct(this.newProduct));
-    this.clearForm();
+  checkProductId(id) {
+    this.httpClient.get(DOMAINAPI + 'product/' + id, {
+      observe: 'body'
+    }).subscribe(
+      (response: any) => {
+        if (response === null) {
+          this.createNewProduct();
+        } else {
+          alert('Mã sản phẩm đã tồn tại! Vui lòng nhập mã sản phẩm khác');
+        }
+      }
+    );
   }
 
-  clearForm() {
-    this.newProduct = {
-      _id: null,
-      productId: null,
-      productName: null,
-      category: '',
-      price: null,
-      discount: null,
-      image: [],
-      description: [],
-      sale: false,
-      new: false,
-      hot: false,
-      amount: null
-    };
-    (<HTMLInputElement>document.getElementById('newImages')).value = '';
-    $('#createNew').modal('hide');
+  createNewProduct() {
+    this.store.dispatch(new ProductActions.CreateNewProduct(this.newProduct));
+    this.clearForm('newImages', this.newProduct, '#createNew');
+  }
+
+  clearForm(id, isNew, idmodal) {
+    if (isNew) {
+      this.newProduct = {
+        _id: null,
+        productId: null,
+        productName: null,
+        category: '',
+        price: null,
+        discount: null,
+        image: [],
+        description: [],
+        sale: false,
+        new: false,
+        hot: false,
+        amount: null
+      };
+    } else {
+      this.editProductModel = {
+        _id: null,
+        productId: null,
+        productName: null,
+        category: '',
+        price: null,
+        discount: null,
+        image: [],
+        description: [],
+        sale: false,
+        new: false,
+        hot: false,
+        amount: null
+      };
+    }
+    (<HTMLInputElement>document.getElementById(id)).value = '';
+    $(idmodal).modal('hide');
   }
 
   validForm(item) {
@@ -105,19 +153,24 @@ export class ProductManagementComponent implements OnInit {
   }
 
   editProduct() {
-    console.log(this.editForm);
+    this.store.dispatch(new ProductActions.UpdateProduct(this.editProductModel));
+    this.clearForm('editImages', this.editProductModel, '#editProduct');
+  }
+
+  deleteProduct(id) {
+    this.store.dispatch(new ProductActions.DeleteProduct(id));
   }
 
   returnEditProduct(item) {
-    this.editProductModel = item;
+    this.editProductModel = Object.assign(this.editProductModel, item);
   }
 
-  async encodeImg() {
-    this.newProduct.image = [];
-    const imgArr = (<HTMLInputElement>document.getElementById('newImages')).files;
+  async encodeImg(id, item) {
+    item.image = [];
+    const imgArr = (<HTMLInputElement>document.getElementById(id)).files;
     for (let i = 0; i < imgArr.length; i++) {
       const base64 = await this.imgToBase64(imgArr[i]);
-      this.newProduct.image.push(base64);
+      item.image.push(base64);
     }
   }
 
@@ -133,13 +186,9 @@ export class ProductManagementComponent implements OnInit {
         reader.onerror = function() {
           reader.abort();
           reject('Failed to read Image');
-        }
+        };
       }
     );
-  }
-
-  alert(c) {
-  console.log(c);
   }
 
 }

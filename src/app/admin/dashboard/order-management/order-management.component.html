@@ -7,12 +7,8 @@
           <div class="col-xs-4">
             <button class="btn btn-primary" style="color:white" data-toggle="modal" data-target="#createNew" data-backdrop="static">Thêm sản phẩm</button>
           </div>
-          <div class="col-xs-8" style="display: flex">
-              <select class="col-xs-2" [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}" ngDefaultControl>
-                <option value="NAME">Theo tên</option>
-                <option value="CATEGORY">Theo loại</option>
-                </select>
-            <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+          <div class="col-xs-8">
+            <input type="text">
             <button class="btn btn-info" style="color:white">Tìm kiếm</button>
           </div>
         </div>
@@ -20,21 +16,17 @@
           <table id="bootstrap-data-table" class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>Loại sản phẩm</th>
-                <th>Mã sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá(VND)</th>
-                <th>Giảm giá(%)</th>
-                <th>New</th>
-                <th>Hot</th>
-                <th>Sale</th>
-                <th>Hình ảnh</th>
-                <th>Chỉnh sửa</th>
-                <th>Xóa</th>
+                <th>Mã đặt hàng</th>
+                <th>Hàng đặt</th>
+                <th>Tổng giá</th>
+                <th>Tên khách</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Trạng thái</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (products | async).products | filter: searchText |reverse | paginate: { id: 'fullProduct', itemsPerPage: itemsPerPage, currentPage: currentPage} ">
+              <tr *ngFor="let item of (products | async).products | reverse | paginate: { id: 'fullProduct', itemsPerPage: itemsPerPage, currentPage: currentPage}">
                 <th>{{item.category}}</th>
                 <th>{{item.productId}}</th>
                 <th>{{item.productName}}</th>

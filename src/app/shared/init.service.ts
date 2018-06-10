@@ -7,13 +7,21 @@ import { Injectable } from '@angular/core';
 
 declare let jQuery: any;
 export const DOMAINAPI = 'https://project-caocuong.herokuapp.com/';
+
+export function showLoadingScreen() {
+  jQuery('body').append('<div id="loader"><div class="loader"></div></div>');
+}
+
+export function hideLoadingScreen() {
+  jQuery('#loader').remove();
+}
+
 @Injectable()
 export class InitService {
 
   constructor(private httpClient: HttpClient, private store: Store<fromAppReducer.AppState>) {
     this.store.dispatch(new ProductActions.GetDataFromServer());
   }
-
   setupStuff() {
     (function ($) {
       $(document).ready(function() {

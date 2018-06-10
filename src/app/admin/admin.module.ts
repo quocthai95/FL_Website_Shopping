@@ -11,6 +11,10 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ReversePipe } from '../shared/reverse.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { OrderManagementComponent } from './dashboard/order-management/order-management.component';
+import { FilterPipe } from '../shared/filter.pipe';
 
 
 @NgModule({
@@ -21,9 +25,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         ModalGalleryModule,
         FormsModule,
         BrowserAnimationsModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        NgxPaginationModule
     ],
-    declarations: [LoginComponent, DashboardComponent, ProductManagementComponent],
+    declarations: [LoginComponent, DashboardComponent, ProductManagementComponent, ReversePipe, OrderManagementComponent, FilterPipe],
     exports: [
     ],
     providers: [AuthService, AuthGuard]

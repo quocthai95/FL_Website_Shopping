@@ -18,6 +18,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { AuthGuard } from './admin/auth-guard.service';
 import { SearchProductComponent } from './shop/search-product/search-product.component';
 import { CompletedOrderComponent } from './shop/cart/completed-order/completed-order.component';
+import { OrderManagementComponent } from './admin/dashboard/order-management/order-management.component';
 
 const appRoutes = [
     {path: '', redirectTo: 'shop', pathMatch: 'full'},
@@ -43,7 +44,8 @@ const appRoutes = [
         {path: 'login', component: LoginComponent},
         {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
             {path: '', redirectTo: 'product-management', pathMatch: 'full'},
-            {path: 'product-management', component: ProductManagementComponent}
+            {path: 'product-management', component: ProductManagementComponent},
+            {path: 'order-management', component: OrderManagementComponent}
         ]}
     ]},
     {path: '**', component: PageNotFoundComponent}

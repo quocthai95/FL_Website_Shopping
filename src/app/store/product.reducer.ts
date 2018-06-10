@@ -16,6 +16,12 @@ export function productReducer(state = initialState, action: ProductActions.Prod
             products: [...action.payload]
         };
 
+        case ProductActions.CREATE_NEW_PRODUCT_LOCAL:
+        return {
+            ...state,
+            products: [...state.products, action.payload]
+        };
+
         default:
         return state;
     }

@@ -16,6 +16,7 @@ import { AdminModule } from './admin/admin.module';
 import 'hammerjs';
 import 'mousetrap';
 import { ModalGalleryModule } from 'angular-modal-gallery';
+import { ReversePipe } from './shared/reverse.pipe';
 
 @NgModule({
   declarations: [
