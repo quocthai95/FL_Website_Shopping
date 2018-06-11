@@ -5,6 +5,7 @@ import * as fromProductReducer from '../store/product.reducer';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../shared/init.service';

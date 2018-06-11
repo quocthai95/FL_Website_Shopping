@@ -4,41 +4,44 @@
 
     <form>
 
-      <h1>Shopping cart</h1>
-      <p class="text-muted">You currently have {{productOrder?productOrder.length:0}} item(s) in your cart.</p>
+      <h1>Giỏ hàng</h1>
+      <p class="text-muted">Bạn hiện có {{productOrder?productOrder.length:0}} món hàng trong giỏ.</p>
       <div class="table-responsive">
         <table class="table" *ngIf="productOrder; else noLocalCart">
           <thead>
             <tr>
-              <th colspan="2">Product</th>
-              <th>Quantity</th>
-              <th>Unit price</th>
-              <th>Discount</th>
-              <th colspan="2">Total</th>
+              <th colspan="2">Sản phẩm</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+              <th>Giảm giá</th>
+              <th colspan="2">Tổng</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of productOrder; let i = index">
               <td>
-                <a [routerLink]="['/shop/category', item._id]">
-                  <img src="{{item.img[0]}}" alt="{{item.name}}">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                  <img src="{{item.image[0]}}" alt="{{item.productName}}">
                 </a>
               </td>
               <td>
-                <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
               </td>
               <td>
-                <input type="number" min="0" class="form-control" (keyup)="checkTotalPrice()" [name]="item.name" [(ngModel)]="item.quantity">
+                <input type="number" min="0" class="form-control" (keyup)="checkTotalPrice()" [name]="item.productName" [(ngModel)]="item.amount">
               </td>
-              <td>{{item.price | currency:'USD':'symbol':'1.2-2'}}</td>
-              <td>$0.00</td>
-              <td>{{item.price*item.quantity | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{item.price | number:'1.0-0'}}</td>
+              <td>{{item.discount}}%</td>
+              <td *ngIf="!item.discount">{{item.price*item.amount | number:'1.0-0'}}</td>
+              <td *ngIf="item.discount">{{item.price*(100-item.discount)/100*item.amount | number:'1.0-0'}}</td>
               <td>
                 <a mwlConfirmationPopover
                 [popoverClass]="'text-center-imp'"
                 [popoverTitle]="popperTitle"
-                [popoverMessage]="'Do you want to delete this product?'"
+                [popoverMessage]="'Bạn muốn xóa món hàng này?'"
                 placement="right"
+                [confirmText]="'Xác nhận'"
+                [cancelText]="'Hủy'"
                 (confirm)="removeItemFromCart(i)">
                   <i class="fa fa-trash-o"></i>
                 </a>
@@ -47,13 +50,13 @@
           </tbody>
           <tfoot>
             <tr>
-              <th colspan="5">Total</th>
+              <th colspan="5">Tổng cộng</th>
               <th colspan="2">{{totalPrice | currency:'USD':'symbol':'1.2-2'}}</th>
             </tr>
           </tfoot>
         </table>
         <ng-template #noLocalCart>
-          <h1 style="color: red;text-align: center">No Order Found</h1>
+          <h1 style="color: red;text-align: center">Bạn hiện chưa có đặt hàng.</h1>
         </ng-template>
 
       </div>
@@ -61,13 +64,13 @@
 
       <div class="box-footer">
         <div class="pull-left">
-          <a [routerLink]="['/shop/category', 'general']" class="btn btn-default">
-            <i class="fa fa-chevron-left"></i> Continue shopping</a>
+          <a [routerLink]="['/shop/productdetail', 'general']" class="btn btn-default">
+            <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm</a>
         </div>
         <div class="pull-right">
           <!-- <button class="btn btn-default">
             <i class="fa fa-refresh"></i> Update basket</button> -->
-          <button (click)="checkout()" class="btn btn-primary" [disabled]="!productOrder">Proceed to checkout
+          <button (click)="checkout()" class="btn btn-primary" [disabled]="!productOrder">Tiếp
             <i class="fa fa-chevron-right"></i>
           </button>
         </div>

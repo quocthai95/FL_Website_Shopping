@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+    position: relative;
+}
+
 .text-center-imp {
     text-align: center !important;
 }
@@ -7,6 +12,7 @@
 div.product a img {
     height: 250px !important;
 }
+
 
 #loader .loader {
     border: 10px solid #f3f3f3; /* Light grey */
@@ -30,7 +36,7 @@ div.product a img {
 
 #loader {
     z-index: 1000;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     position: absolute;
     top: 0;

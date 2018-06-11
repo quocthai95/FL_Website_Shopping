@@ -167,22 +167,22 @@ _________________________________________________________ -->
           <div class="row" id="productMain">
               <div class="col-sm-6">
                   <div id="mainImage">
-                      <img src="{{(product | async)?.img[0]}}" alt="" class="img-responsive">
+                      <img src="{{product.image[0]}}" alt="" class="img-responsive">
                   </div>
 
-                  <div class="ribbon sale" *ngIf="(product | async)?.sale">
+                  <div class="ribbon sale" *ngIf="product.sale">
                       <div class="theribbon">SALE</div>
                       <div class="ribbon-background"></div>
                   </div>
                   <!-- /.ribbon -->
 
-                  <div class="ribbon new" *ngIf="(product | async)?.new">
+                  <div class="ribbon new" *ngIf="product.new">
                       <div class="theribbon">NEW</div>
                       <div class="ribbon-background"></div>
                   </div>
                   <!-- /.ribbon -->
 
-                  <div class="ribbon gift" *ngIf="(product | async)?.gift">
+                  <div class="ribbon gift" *ngIf="product.hot">
                     <div class="theribbon">HOT</div>
                     <div class="ribbon-background"></div>
                   </div>
@@ -191,32 +191,34 @@ _________________________________________________________ -->
               </div>
               <div class="col-sm-6">
                   <div class="box">
-                      <h1 class="text-center">{{(product | async)?.name}}</h1>
-                      <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
-                      </p>
-                      <p class="price"><del *ngIf="(product | async)?.oldPrice">{{(product | async)?.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{(product | async)?.price | currency:'USD':'symbol':'1.2-2'}}</p>
+                    <h1 class="text-center">{{product.productName}}</h1>
+                    <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
+                    </p>
+                    <p class="price" *ngIf="!product.discount">{{product.price | number:'1.0-0'}}</p>
+                    <p class="price" *ngIf="product.discount"><del>{{product.price | number:'1.0-0'}}</del> {{product.price*(100-product.discount)/100 | number:'1.0-0'}}</p>
+                    <p class="price" *ngIf="!product.price">Liên hệ</p>
 
-                      <p class="text-center buttons">
-                          <a (click)="addCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-                      </p>
+                    <p class="text-center buttons">
+                        <a (click)="addCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
+                    </p>
 
 
                   </div>
 
-                  <div class="row" id="thumbs" *ngIf="(product | async)?.img">
-                      <div class="col-xs-4" *ngFor="let img of (product | async)?.img">
-                          <a href="{{img}}" class="thumb">
-                              <img src="{{img}}" alt="" class="img-responsive">
+                  <div class="row" id="thumbs" *ngIf="product.image">
+                      <div class="col-xs-4" *ngFor="let img of product.image; let i = index">
+                          <a class="thumb" href="{{img}}" (click)="productDetailGallery($event, '#thumb' + i)" [id]="'thumb' + i">
+                              <img src="{{img}}" alt="" class="img-responsive" >
                           </a>
                       </div>
-                      <!-- <div class="col-xs-4" *ngIf="(product | async)?.img[1]">
-                          <a href="{{(product | async)?.img[1]}}" class="thumb">
-                              <img src="{{(product | async)?.img[1]}}" alt="" class="img-responsive">
+                      <!-- <div class="col-xs-4" *ngIf="product?.img[1]">
+                          <a href="{{product?.img[1]}}" class="thumb">
+                              <img src="{{product?.img[1]}}" alt="" class="img-responsive">
                           </a>
                       </div>
-                      <div class="col-xs-4" *ngIf="(product | async)?.img[2]">
-                          <a href="{{(product | async)?.img[2]}}" class="thumb">
-                              <img src="{{(product | async)?.img[2]}}" alt="" class="img-responsive">
+                      <div class="col-xs-4" *ngIf="product?.img[2]">
+                          <a href="{{product?.img[2]}}" class="thumb">
+                              <img src="{{product?.img[2]}}" alt="" class="img-responsive">
                           </a>
                       </div> -->
                   </div>
@@ -269,18 +271,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product2_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product2.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">
@@ -296,18 +298,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product1.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product1_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product1.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">
@@ -324,18 +326,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product3.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product3_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product3.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">
@@ -362,18 +364,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product2_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product2.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">
@@ -389,18 +391,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product1.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product1_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product1.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">
@@ -417,18 +419,18 @@ _________________________________________________________ -->
                       <!-- <div class="flip-container">
                           <div class="flipper">
                               <div class="front">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product3.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                               <div class="back">
-                                  <a [routerLink]="['/shop/category','detail']">
+                                  <a [routerLink]="['/shop/productdetail','detail']">
                                       <img src="assets/images/product3_2.jpg" alt="" class="img-responsive">
                                   </a>
                               </div>
                           </div>
                       </div> -->
-                      <a [routerLink]="['/shop/category','detail']" class="">
+                      <a [routerLink]="['/shop/productdetail','detail']" class="">
                           <img src="assets/images/product3.jpg" alt="" class="img-responsive">
                       </a>
                       <div class="text">

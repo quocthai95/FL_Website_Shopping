@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CheckoutOrderComponent implements OnInit {
   productOrder = null;
   totalPrice = 0;
-  popperTitle = `<b>Confirmation</b>`;
+  popperTitle = `<b>Xác nhận</b>`;
   constructor(private sharedDataService: SharedDataService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class CheckoutOrderComponent implements OnInit {
   checkTotalPrice() {
     this.totalPrice = 0;
     this.productOrder.forEach(item => {
-      this.totalPrice += item.price * item.quantity;
+      this.totalPrice += item.price * item.amount;
     });
     this.sharedDataService.totalPriceObs.next(this.totalPrice);
     localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));

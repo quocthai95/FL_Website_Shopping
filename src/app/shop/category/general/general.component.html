@@ -50,27 +50,27 @@
             <!-- <div class="flip-container">
               <div class="flipper">
                 <div class="front">
-                  <a [routerLink]="['/shop/category', item._id]">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                     <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
-                  <a [routerLink]="['/shop/category', item._id]">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                     <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div> -->
-            <a [routerLink]="['/shop/category', item._id]" class="">
+            <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
               <img src="{{item.img[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/shop/category', item._id]">Fur coat with very but very very long name</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">Fur coat with very but very very long name</a>
               </h3>
               <p class="price"><del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{item.price | currency:'USD':'symbol':'1.2-2'}}</p>
               <p class="buttons">
-                <a [routerLink]="['/shop/category', item._id]" class="btn btn-default">View detail</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="btn btn-default">View detail</a>
               </p>
             </div>
             <!-- /.text -->

@@ -99,23 +99,23 @@ _________________________________________________________ -->
             <!-- <div class="flip-container">
               <div class="flipper">
                 <div class="front">
-                  <a [routerLink]="['/shop/category', item._id]">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                     <img src="{{item.img[0]}}" alt="" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
-                  <a [routerLink]="['/shop/category', item._id]">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                     <img src="{{item.img[1]}}" alt="" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div> -->
-            <a [routerLink]="['/shop/category', item._id]" class="">
+            <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
               <img src="{{item.image[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
               </h3>
               <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
               <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
@@ -176,23 +176,23 @@ _________________________________________________________ -->
           <!-- <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <a [routerLink]="['/shop/category', item._id]">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                   <img src="{{item.img[0]}}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="back">
-                <a [routerLink]="['/shop/category', item._id]">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                   <img src="{{item.img[1]}}" alt="" class="img-responsive">
                 </a>
               </div>
             </div>
           </div> -->
-          <a [routerLink]="['/shop/category', item._id]" class="">
+          <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
             <img src="{{item.image[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
+              <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
             </h3>
             <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
             <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
@@ -253,23 +253,23 @@ _________________________________________________________ -->
           <!-- <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <a [routerLink]="['/shop/category', item._id]">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                   <img src="{{item.img[0]}}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="back">
-                <a [routerLink]="['/shop/category', item._id]">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                   <img src="{{item.img[1]}}" alt="" class="img-responsive">
                 </a>
               </div>
             </div>
           </div> -->
-          <a [routerLink]="['/shop/category', item._id]" class="">
+          <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
             <img src="{{item.image[0]}}" alt="" class="img-responsive" >
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
+              <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
             </h3>
             <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
             <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>

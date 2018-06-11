@@ -41,7 +41,7 @@ export class ProductManagementComponent implements OnInit {
     sale: false,
     new: false,
     hot: false,
-    amount: null
+    amount: 1
   };
 
   editProductModel: ProductModel = {
@@ -56,7 +56,7 @@ export class ProductManagementComponent implements OnInit {
     sale: null,
     new: null,
     hot: null,
-    amount: null
+    amount: 1
   };
 
   ngOnInit() {
@@ -109,7 +109,7 @@ export class ProductManagementComponent implements OnInit {
         sale: false,
         new: false,
         hot: false,
-        amount: null
+        amount: 1
       };
     } else {
       this.editProductModel = {
@@ -124,7 +124,7 @@ export class ProductManagementComponent implements OnInit {
         sale: false,
         new: false,
         hot: false,
-        amount: null
+        amount: 1
       };
     }
     $(idmodal).modal('hide');

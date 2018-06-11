@@ -27,12 +27,12 @@
                   <tbody>
                     <tr *ngFor="let item of productOrder; let i = index">
                       <td>
-                        <a [routerLink]="['/shop/category', item._id]">
+                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
                           <img src="{{item.img[0]}}" alt="{{item.name}}">
                         </a>
                       </td>
                       <td>
-                        <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
+                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.name}}</a>
                       </td>
                       <td>
                         <input type="number" readonly class="form-control"  [name]="item.name" [(ngModel)]="item.quantity">

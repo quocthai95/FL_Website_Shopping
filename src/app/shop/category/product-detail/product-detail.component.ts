@@ -1,33 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ProductModel } from '../../../shared/product.model';
-import { InitService } from '../../../shared/init.service';
-import { Store } from '@ngrx/store';
+import { InitService, DOMAINAPI } from '../../../shared/init.service';
 import { Observable } from 'rxjs/Observable';
-import * as fromAppReducer from '../../../store/app.reducer';
-import * as fromProductReducer from '../../../store/product.reducer';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/first';
-import { map } from 'rxjs/operator/map';
 import { SharedDataService } from '../../../shared/shared-data.service';
+import { HttpClient } from '@angular/common/http';
 
+declare const $: any;
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  product:  Observable<ProductModel>;
+  product:  ProductModel = {
+    _id: null,
+    productId: null,
+    productName: null,
+    category: '',
+    price: null,
+    discount: null,
+    image: [],
+    description: [],
+    sale: false,
+    new: false,
+    hot: false,
+    amount: null
+  };
+  productId: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private initService: InitService,
-    private store: Store<fromAppReducer.AppState>, private sharedDataService: SharedDataService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+  private initService: InitService, private sharedDataService: SharedDataService, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.initService.setupStuff();
-    this.product = this.store.select('product')
-    .map((productsState: fromProductReducer.State) => {
-      return productsState.products[+this.route.snapshot.params['id'] - 1];
-    });
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.productId = params['id'];
+        this.httpClient.get(DOMAINAPI + 'product/' + this.productId).subscribe(
+          (response: any) => {
+            if (response) {
+              this.product = response;
+            } else {
+              this.router.navigate(['not-found']);
+            }
+          }
+        );
+      }
+    );
+  }
+
+  productDetailGallery(e, element) {
+   this.switchImage($(element));
+   e.preventDefault();
+  }
+
+  switchImage(thumb) {
+    $('.thumb').removeClass('active');
+    const bigUrl = thumb.attr('href');
+    thumb.addClass('active');
+    $('#mainImage img').attr('src', bigUrl);
   }
 
   saveCartDataToLocal(item) {
@@ -41,9 +72,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addCart() {
-    this.product.first().subscribe((item: ProductModel) => {
-      this.saveCartDataToLocal(item);
-    });
+    this.saveCartDataToLocal(this.product);
     this.sharedDataService.cartItemsObs.next(JSON.parse(localStorage.getItem('productOrder')).length);
     this.router.navigate(['/shop/cart']);
   }
