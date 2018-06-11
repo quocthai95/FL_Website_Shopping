@@ -4,6 +4,10 @@
     text-align: center !important;
 }
 
+div.product a img {
+    height: 250px !important;
+}
+
 #loader .loader {
     border: 10px solid #f3f3f3; /* Light grey */
     border-top: 10px solid #3498db; /* Blue */

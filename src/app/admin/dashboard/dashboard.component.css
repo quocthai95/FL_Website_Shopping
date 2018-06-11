@@ -2291,3 +2291,7 @@ input::-webkit-inner-spin-button {
   padding: 0;
   pointer-events: none;
 }
+
+.card-header {
+  padding-top: 10px;
+}

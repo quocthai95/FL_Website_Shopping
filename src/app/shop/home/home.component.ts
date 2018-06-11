@@ -13,16 +13,22 @@ import * as fromProductReducer from '../../store/product.reducer';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  hotProduct: Observable<Array<ProductModel>>;
-  saleProduct: Observable<Array<ProductModel>>;
-  newProduct: Observable<Array<ProductModel>>;
+  hotProduct: Observable<fromProductReducer.State>;
+  saleProduct: Observable<fromProductReducer.State>;
+  newProduct: Observable<fromProductReducer.State>;
   constructor(private initService: InitService, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.initService.setupStuff();
-    // this.httpClient.get(DOMAINAPI + 'home', {
-    //   observe: 'body'
-    // }).subscribe()
+    this.httpClient.get(DOMAINAPI + 'home', {
+      observe: 'body'
+    }).subscribe(
+      (response: any) => {
+        this.hotProduct = response[0].hot;
+        this.newProduct = response[1].new;
+        this.saleProduct = response[2].sale;
+      }
+    )
   }
 
 }

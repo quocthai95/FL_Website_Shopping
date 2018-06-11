@@ -92,9 +92,9 @@ _________________________________________________________ -->
 
     <div class="container">
       <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
-      [items]="(products | async).products" 
+      [items]="hotProduct" 
       [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
-        <div class="item" *ngFor="let item of (products | async).products">
+        <div class="item" *ngFor="let item of hotProduct ">
           <div class="product">
             <!-- <div class="flip-container">
               <div class="flipper">
@@ -111,14 +111,15 @@ _________________________________________________________ -->
               </div>
             </div> -->
             <a [routerLink]="['/shop/category', item._id]" class="">
-              <img src="{{item.img[0]}}" alt="" class="img-responsive">
+              <img src="{{item.image[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
+                <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
               </h3>
-              <p class="price">
-                <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
+              <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="!item.price">Liên hệ</p>
             </div>
             <!-- /.text -->
 
@@ -168,9 +169,9 @@ _________________________________________________________ -->
 
   <div class="container">
     <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
-    [items]="(products | async).products" 
+    [items]="saleProduct" 
     [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
-      <div class="item" *ngFor="let item of (products | async).products">
+      <div class="item" *ngFor="let item of saleProduct">
         <div class="product">
           <!-- <div class="flip-container">
             <div class="flipper">
@@ -187,14 +188,15 @@ _________________________________________________________ -->
             </div>
           </div> -->
           <a [routerLink]="['/shop/category', item._id]" class="">
-            <img src="{{item.img[0]}}" alt="" class="img-responsive">
+            <img src="{{item.image[0]}}" alt="" class="img-responsive">
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
+              <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
             </h3>
-            <p class="price">
-              <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.price">Liên hệ</p>
           </div>
           <!-- /.text -->
 
@@ -243,10 +245,10 @@ _________________________________________________________ -->
   
 
   <div class="container">
-    <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true}"
-    [items]="(products | async).products" 
+    <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true, autoHeight: false}"
+    [items]="newProduct" 
     [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
-      <div class="item" *ngFor="let item of (products | async).products">
+      <div class="item" *ngFor="let item of newProduct">
         <div class="product">
           <!-- <div class="flip-container">
             <div class="flipper">
@@ -263,14 +265,15 @@ _________________________________________________________ -->
             </div>
           </div> -->
           <a [routerLink]="['/shop/category', item._id]" class="">
-            <img src="{{item.img[0]}}" alt="" class="img-responsive">
+            <img src="{{item.image[0]}}" alt="" class="img-responsive" >
           </a>
           <div class="text">
             <h3>
-              <a [routerLink]="['/shop/category', item._id]">{{item.name}}</a>
+              <a [routerLink]="['/shop/category', item._id]">{{item.productName}}</a>
             </h3>
-            <p class="price">
-              <del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.0-0'}}</del> {{item.price | currency:'USD':'symbol':'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.price">Liên hệ</p>
           </div>
           <!-- /.text -->
 

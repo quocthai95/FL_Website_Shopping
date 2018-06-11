@@ -8,12 +8,11 @@
             <button class="btn btn-primary" style="color:white" data-toggle="modal" data-target="#createNew" data-backdrop="static">Thêm sản phẩm</button>
           </div>
           <div class="col-xs-8" style="display: flex">
-              <select class="col-xs-2" [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}" ngDefaultControl>
-                <option value="NAME">Theo tên</option>
-                <option value="CATEGORY">Theo loại</option>
+              <select class="col-xs-4" [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                <option value="NAME">Tìm theo tên</option>
+                <option value="CATEGORY">Tìm theo loại</option>
                 </select>
             <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" ngDefaultControl>
-            <button class="btn btn-info" style="color:white">Tìm kiếm</button>
           </div>
         </div>
         <div class="card-body">
@@ -34,11 +33,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (products | async).products | filter: searchText |reverse | paginate: { id: 'fullProduct', itemsPerPage: itemsPerPage, currentPage: currentPage} ">
+              <tr *ngFor="let item of (products | async).products | filter: searchText: searchType |reverse | paginate: { id: 'fullProduct', itemsPerPage: itemsPerPage, currentPage: currentPage} ">
                 <th>{{item.category}}</th>
                 <th>{{item.productId}}</th>
                 <th>{{item.productName}}</th>
-                <th>{{item.price | number:'1.2-2'}}</th>
+                <th>{{item.price | number:'1.0-0'}}</th>
                 <th>{{item.discount}}</th>
                 <th><mat-slide-toggle [ngModelOptions]="{standalone: true}" ngDefaultControl [color]="'primary'" [(ngModel)]="item.new" [disabled]="'true'"></mat-slide-toggle></th>
                 <th><mat-slide-toggle [ngModelOptions]="{standalone: true}" ngDefaultControl [color]="'primary'" [(ngModel)]="item.hot" [disabled]="'true'"></mat-slide-toggle></th>
@@ -63,7 +62,7 @@
             </tbody>
           </table>
           <div class="pages">
-            <pagination-controls style="float: right;" id="fullProduct" (pageChange)="currentPage =$event"></pagination-controls>
+            <pagination-controls *ngIf="(products | async).products.length > 0" style="float: right;" id="fullProduct" (pageChange)="currentPage =$event"></pagination-controls>
           </div>
         </div>
       </div>
@@ -79,7 +78,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="clearForm('newImages', true, '#createNew')">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="clearForm(true, '#createNew')">&times;</button>
         <h3 class="modal-title">Thêm sản phẩm mới</h3>
       </div>
       <div class="modal-body">
@@ -158,13 +157,24 @@
             <label class="col-xs-4 label-text">Thông tin khác</label>
             <textarea type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.description[2]"></textarea>
           </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 1</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.image[0]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 2</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.image[1]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 3</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.image[2]"
+            />
+          </div>
           <div class="row form-pad flex-center">
-            <div class="col-xs-12">
-              <label class="col-xs-5 label-text">Hình ảnh</label>
-              <input type="file" class="col-xs-7" multiple id="newImages" (change)="encodeImg('newImages', newProduct)" />
-            </div>
             <div class="col-xs-12" *ngIf="newProduct.image.length > 0">
-              <img [src]="img" alt="Image" *ngFor="let img of newProduct.image" height="40px" width="40px" style="padding-right: 1rem">
+              <img [src]="img" alt="Image" *ngFor="let img of newProduct.image" height="80px" width="80px" style="padding-right: 1rem">
             </div>
           </div>
           <div class="form-pad" style="text-align: center">
@@ -173,7 +183,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm('newImages', true, '#editProduct')">Thoát</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm(true, '#editProduct')">Thoát</button>
       </div>
     </div>
   </div>
@@ -185,7 +195,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="clearForm('editImages', false, '#createNew')">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="clearForm(false, '#createNew')">&times;</button>
         <h3 class="modal-title">Chỉnh sửa sản phẩm</h3>
       </div>
       <div class="modal-body">
@@ -259,13 +269,24 @@
             <label class="col-xs-4 label-text">Thông tin khác</label>
             <textarea type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.description[2]"></textarea>
           </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 1</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[0]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 2</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[1]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 3</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[2]"
+            />
+          </div>
           <div class="row form-pad flex-center">
-            <div class="col-xs-12">
-              <label class="col-xs-5 label-text">Hình ảnh</label>
-              <input type="file" class="col-xs-7" multiple id="editImages" (change)="encodeImg('editImages', editProductModel)" />
-            </div>
             <div class="col-xs-12 row" *ngIf="editProductModel.image.length > 0">
-                <img [src]="img" alt="Image" style="padding-right: 1rem" height="40px" width="40px" *ngFor="let img of editProductModel.image">
+                <img [src]="img" alt="Image" style="padding-right: 1rem" height="80px" width="80px" *ngFor="let img of editProductModel.image">
             </div>
           </div>
           <div class="form-pad" style="text-align: center">
@@ -274,7 +295,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm('editImages', false, '#editProduct')">Thoát</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm(false, '#editProduct')">Thoát</button>
       </div>
     </div>
   </div>

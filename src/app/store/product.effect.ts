@@ -44,12 +44,11 @@ export class ProductEffect {
             observe: 'body'
         });
     })
-    .switchMap((response: any) => {
+    .map((response: any) => {
         hideLoadingScreen();
-        return [{
-            type: ProductActions.CREATE_NEW_PRODUCT_LOCAL,
-            payload: response[0]
-        }];
+        return {
+            type: ProductActions.GET_DATA_FROM_SERVER
+        };
     })
     .catch((e: any) => {
         hideLoadingScreen();

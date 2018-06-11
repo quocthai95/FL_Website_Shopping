@@ -10,10 +10,12 @@ export const DOMAINAPI = 'https://project-caocuong.herokuapp.com/';
 
 export function showLoadingScreen() {
   jQuery('body').append('<div id="loader"><div class="loader"></div></div>');
+  jQuery('body').css('overflow', 'hidden');
 }
 
 export function hideLoadingScreen() {
   jQuery('#loader').remove();
+  jQuery('body').css('overflow', 'auto');
 }
 
 @Injectable()

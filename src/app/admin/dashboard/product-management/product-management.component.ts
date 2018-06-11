@@ -63,18 +63,6 @@ export class ProductManagementComponent implements OnInit {
     this.products = this.store.select('product');
   }
 
-  searchProduct() {
-    if (this.searchType === 'NAME') {
-      this.httpClient.get(DOMAINAPI + 'product/search/' + this.searchText, {
-        observe: 'body'
-      }).subscribe(
-        (response: any) => {
-          this.searchProducts = response;
-        }
-      )
-    }
-  }
-
   createImgView(item) {
     const imgArr: Image[] = [];
     item.forEach((imgPath, index) => {
@@ -104,10 +92,10 @@ export class ProductManagementComponent implements OnInit {
 
   createNewProduct() {
     this.store.dispatch(new ProductActions.CreateNewProduct(this.newProduct));
-    this.clearForm('newImages', this.newProduct, '#createNew');
+    this.clearForm(true, '#createNew');
   }
 
-  clearForm(id, isNew, idmodal) {
+  clearForm(isNew, idmodal) {
     if (isNew) {
       this.newProduct = {
         _id: null,
@@ -139,7 +127,6 @@ export class ProductManagementComponent implements OnInit {
         amount: null
       };
     }
-    (<HTMLInputElement>document.getElementById(id)).value = '';
     $(idmodal).modal('hide');
   }
 
@@ -154,7 +141,7 @@ export class ProductManagementComponent implements OnInit {
 
   editProduct() {
     this.store.dispatch(new ProductActions.UpdateProduct(this.editProductModel));
-    this.clearForm('editImages', this.editProductModel, '#editProduct');
+    this.clearForm(false, '#editProduct');
   }
 
   deleteProduct(id) {
@@ -165,30 +152,30 @@ export class ProductManagementComponent implements OnInit {
     this.editProductModel = Object.assign(this.editProductModel, item);
   }
 
-  async encodeImg(id, item) {
-    item.image = [];
-    const imgArr = (<HTMLInputElement>document.getElementById(id)).files;
-    for (let i = 0; i < imgArr.length; i++) {
-      const base64 = await this.imgToBase64(imgArr[i]);
-      item.image.push(base64);
-    }
-  }
+  // async encodeImg(id, item) {
+  //   item.image = [];
+  //   const imgArr = (<HTMLInputElement>document.getElementById(id)).files;
+  //   for (let i = 0; i < imgArr.length; i++) {
+  //     const base64 = await this.imgToBase64(imgArr[i]);
+  //     item.image.push(base64);
+  //   }
+  // }
 
-  imgToBase64(img) {
-    const reader = new FileReader();
-    return new Promise(
-      (resolve, reject) => {
-        reader.readAsDataURL(img);
-        reader.onloadend = function() {
-          resolve(reader.result);
-        };
+  // imgToBase64(img) {
+  //   const reader = new FileReader();
+  //   return new Promise(
+  //     (resolve, reject) => {
+  //       reader.readAsDataURL(img);
+  //       reader.onloadend = function() {
+  //         resolve(reader.result);
+  //       };
 
-        reader.onerror = function() {
-          reader.abort();
-          reject('Failed to read Image');
-        };
-      }
-    );
-  }
+  //       reader.onerror = function() {
+  //         reader.abort();
+  //         reject('Failed to read Image');
+  //       };
+  //     }
+  //   );
+  // }
 
 }
