@@ -39,7 +39,7 @@ export class CheckoutOrderReviewComponent implements OnInit, OnDestroy {
     showLoadingScreen();
     const orderData = {
       guestInfor: {
-        other: [this.userInfo.address],
+        other: [this.userInfo.address, new Date()],
         name: this.userInfo.name,
         email: this.userInfo.email,
         phoneNumber: this.userInfo.phone

@@ -48,18 +48,18 @@
               <div class="flipper">
                 <div class="front">
                   <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
-                    <img src="{{item.img[0]}}" alt="" class="img-responsive">
+                    <img src="{{item.img[0]}}" alt="Image" class="img-responsive">
                   </a>
                 </div>
                 <div class="back">
                   <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
-                    <img src="{{item.img[1]}}" alt="" class="img-responsive">
+                    <img src="{{item.img[1]}}" alt="Image" class="img-responsive">
                   </a>
                 </div>
               </div>
             </div> -->
             <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
-              <img src="{{item.image[0]}}" alt="" class="img-responsive">
+              <img src="{{item.image[0]}}" alt="Image" class="img-responsive">
             </a>
             <div class="text">
               <h3>

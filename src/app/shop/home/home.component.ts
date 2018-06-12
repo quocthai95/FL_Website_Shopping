@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { InitService, DOMAINAPI } from '../../shared/init.service';
+import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../shared/init.service';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../../shared/product.model';
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(private initService: InitService, private httpClient: HttpClient) { }
 
   ngOnInit() {
+    showLoadingScreen();
     this.initService.setupStuff();
     this.httpClient.get(DOMAINAPI + 'home', {
       observe: 'body'
@@ -27,8 +28,12 @@ export class HomeComponent implements OnInit {
         this.hotProduct = response[0].hot;
         this.newProduct = response[1].new;
         this.saleProduct = response[2].sale;
+        hideLoadingScreen();
+      }, (err) => {
+        hideLoadingScreen();
+        alert('Lỗi lấy dữ liệu!');
       }
-    )
+    );
   }
 
 }

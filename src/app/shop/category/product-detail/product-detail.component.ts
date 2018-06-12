@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ProductModel } from '../../../shared/product.model';
-import { InitService, DOMAINAPI } from '../../../shared/init.service';
+import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../../shared/init.service';
 import { Observable } from 'rxjs/Observable';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { HttpClient } from '@angular/common/http';
@@ -28,22 +28,42 @@ export class ProductDetailComponent implements OnInit {
     hot: false,
     amount: null
   };
+
+  relateProducts = [];
   productId: string;
 
   constructor(private route: ActivatedRoute, private router: Router,
   private initService: InitService, private sharedDataService: SharedDataService, private httpClient: HttpClient) { }
 
   ngOnInit() {
+    showLoadingScreen();
     this.route.params.subscribe(
       (params: Params) => {
         this.productId = params['id'];
+        const relateData = {
+          category: params['category'],
+          productId: this.productId
+        };
+
         this.httpClient.get(DOMAINAPI + 'product/' + this.productId).subscribe(
           (response: any) => {
             if (response) {
               this.product = response;
+              hideLoadingScreen();
             } else {
+              hideLoadingScreen();
               this.router.navigate(['not-found']);
             }
+          }
+        );
+
+        this.httpClient.post(DOMAINAPI + 'product/category3', relateData, {
+          observe: 'body'
+        }).subscribe(
+          (response: any) => {
+            this.relateProducts = response;
+          }, (err) => {
+            alert('Lỗi không tìm thấy sản phẩm liên quan!');
           }
         );
       }

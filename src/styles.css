@@ -7,6 +7,11 @@
 
 div.product a img {
     height: 250px !important;
+    width: 100%;
+}
+
+div.product.relate-product a img {
+    height: 200px !important;
 }
 
 

@@ -7,7 +7,5 @@ export interface OrderModel {
       };
       status: string;
       listProduct: Array<any>;
-      _id: string;
-      orderId: string;
       totalPrice: number;
 }

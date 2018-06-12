@@ -4,45 +4,46 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header row">
-          <div class="col-xs-4">
-            <button class="btn btn-primary" style="color:white" data-toggle="modal" data-target="#createNew" data-backdrop="static">Thêm sản phẩm</button>
-          </div>
-          <div class="col-xs-8">
-            <input type="text">
-            <button class="btn btn-info" style="color:white">Tìm kiếm</button>
+          <div class="col-xs-8" style="display: flex">
+              <select class="col-xs-4" [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                <option value="NAME">Tìm theo tên</option>
+                <option value="CATEGORY">Tìm theo loại</option>
+                </select>
+            <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" ngDefaultControl>
           </div>
         </div>
         <div class="card-body">
           <table id="bootstrap-data-table" class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>Mã đặt hàng</th>
-                <th>Hàng đặt</th>
-                <th>Tổng giá</th>
+                <th>Mã đơn hàng</th>
                 <th>Tên khách</th>
                 <th>Email</th>
                 <th>Số điện thoại</th>
-                <th>Trạng thái</th>
+                <th>Địa chỉ</th>
+                <th>Hàng đặt</th>
+                <th>Tổng giá đơn hàng</th>
+                <th>Ngày tạo</th>
+                <th>Tình trạng</th>
+                <!-- <th>Xóa</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (products | async).products | reverse | paginate: { id: 'fullProduct', itemsPerPage: itemsPerPage, currentPage: currentPage}">
-                <th>{{item.category}}</th>
-                <th>{{item.productId}}</th>
-                <th>{{item.productName}}</th>
-                <th>{{item.price | number:'1.2-2'}}</th>
-                <th>{{item.discount}}</th>
-                <th><mat-slide-toggle [ngModelOptions]="{standalone: true}" ngDefaultControl [color]="'primary'" [(ngModel)]="item.new" [disabled]="'true'"></mat-slide-toggle></th>
-                <th><mat-slide-toggle [ngModelOptions]="{standalone: true}" ngDefaultControl [color]="'primary'" [(ngModel)]="item.hot" [disabled]="'true'"></mat-slide-toggle></th>
-                <th><mat-slide-toggle [ngModelOptions]="{standalone: true}" ngDefaultControl [color]="'primary'" [(ngModel)]="item.sale" [disabled]="'true'"></mat-slide-toggle></th>
+              <tr *ngFor="let item of listOrder | reverse | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage} ">
+                <th>{{item._id}}</th>
+                <th>{{item.guestInfor.name}}</th>
+                <th>{{item.guestInfor.email}}</th>
+                <th>{{item.guestInfor.phoneNumber}}</th>
+                <th><button class="btn btn-info" class="btn btn-info" style="color:white" data-toggle="modal" data-target="#infoAddress" (click)="returnInfoAdress(item.guestInfor.other[0])" data-backdrop="static">Xem</button></th>
+                <th><button class="btn btn-info" class="btn btn-info" style="color:white" data-toggle="modal" data-target="#infoOrder" (click)="returnInfoItem(item.listProduct[0])" data-backdrop="static">Xem</button></th>
+                <th>{{item.totalPrice | number: '1.0-0'}}</th>
+                <th>{{item.guestInfor.other[1] | date: 'dd/MM/yyyy, h:mm a'}}</th>
                 <th>
-                  <ks-modal-gallery [plainGalleryConfig]="plainGalleryRow" [modalImages]="createImgView(item.image)"></ks-modal-gallery>
+                  <button *ngIf="item.status === 'PENDING'" class="btn btn-default" style="color:green" data-toggle="modal" data-target="#editOrder" data-backdrop="static" (click)="returnInfoStatus(item)">Chờ</button>
+                  <button *ngIf="item.status === 'PROCESS'" class="btn btn-default" style="color:blue" data-toggle="modal" data-target="#editOrder" data-backdrop="static" (click)="returnInfoStatus(item)">Đang</button>
+                  <button *ngIf="item.status === 'COMPLETED'" class="btn btn-default" style="color:grey" data-toggle="modal" data-target="#editOrder" data-backdrop="static" (click)="returnInfoStatus(item)">Xong</button>
                 </th>
-                <th>
-                  <button class="btn btn-info" style="color:white" data-toggle="modal" data-target="#editProduct" data-backdrop="static" (click)="returnEditProduct(item)">Sửa</button>
-
-                </th>
-                <th>
+                <!-- <th>
                     <button mwlConfirmationPopover
                     [popoverClass]="'text-center-imp'"
                     [popoverTitle]="'Xác nhận'"
@@ -50,12 +51,12 @@
                     placement="left"
                     [confirmText]="'Xác nhận'" [cancelText]="'Hủy'"
                     (confirm)="deleteProduct(item.productId)" class="btn btn-danger" style="color:white">Xóa</button>
-                </th>
+                </th> -->
               </tr>
             </tbody>
           </table>
           <div class="pages">
-            <pagination-controls style="float: right;" id="fullProduct" (pageChange)="currentPage =$event"></pagination-controls>
+            <pagination-controls *ngIf="listOrder.length > 0" style="float: right;" (pageChange)="currentPage =$event"></pagination-controls>
           </div>
         </div>
       </div>
@@ -66,118 +67,113 @@
 </div>
 
 <!-- Modal -->
-<div id="createNew" class="modal fade" role="dialog">
+<div id="infoOrder" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="clearForm('newImages', true, '#createNew')">&times;</button>
-        <h3 class="modal-title">Thêm sản phẩm mới</h3>
+        <button type="button" class="close" data-dismiss="modal" (click)="clearInfo()">&times;</button>
+        <h3 class="modal-title">Thông tin sản phẩm đơn hàng</h3>
       </div>
       <div class="modal-body">
-        <form class="ng-form row form-group">
-          <div class="row">
-            <div class="col-xs-6 flex-center">
-              <label class="col-xs-5 label-text">Loại sản phẩm</label>
-              <select class="col-xs-7" [(ngModel)]="newProduct.category" [ngModelOptions]="{standalone: true}" ngDefaultControl>
-                <option value="">Chọn loại</option>
-                <option value="BAN">Bàn</option>
-                <option value="GHE">Ghế</option>
-                <option value="BON">Bồn</option>
-                <option value="BEP">Bếp</option>
-                <option value="XE">Xe</option>
-                <option value="QUAY">Quầy</option>
-              </select>
-            </div>
-            <div class="col-xs-6 flex-center">
+        <form class="ng-form row form-group" *ngFor="let info of infoItem">
+            <div class="col-xs-12 flex-center">
               <label class="col-xs-5 label-text">Mã sản phẩm</label>
-              <input type="text" class="col-xs-7" [(ngModel)]="newProduct.productId" [ngModelOptions]="{standalone: true}" ngDefaultControl
+              <input type="text" class="col-xs-7" [(ngModel)]="info.productId" [ngModelOptions]="{standalone: true}" ngDefaultControl readonly
               />
             </div>
-          </div>
-          <!-- <div class="row flex-center form-pad">
-            <label class="col-xs-4 label-text">Mã sản phẩm</label>
-            <span *ngIf="newProduct.category">{{newProduct.category}}</span>
-            <span *ngIf="newProduct.category && newProduct.productId">{{newProduct.productId}}</span>
-          </div> -->
-          <div class="row flex-center form-pad">
-            <label class="col-xs-4 label-text">Tên sản phẩm</label>
-            <input type="text" class="col-xs-8" [(ngModel)]="newProduct.productName" [ngModelOptions]="{standalone: true}" ngDefaultControl
+          <div class="col-xs-12 flex-center form-pad">
+            <label class="col-xs-5 label-text">Tên sản phẩm</label>
+            <input type="text" class="col-xs-7" [(ngModel)]="info.productName" [ngModelOptions]="{standalone: true}" ngDefaultControl readonly
             />
           </div>
-          <div class="row form-pad">
-            <div class="col-xs-6 flex-center">
+            <div class="col-xs-6 flex-center form-pad">
               <label class="col-xs-5 label-text">Giá</label>
-              <input type="number" min="0" class="col-xs-7" [(ngModel)]="newProduct.price" [ngModelOptions]="{standalone: true}" ngDefaultControl
-              />
+              <div class="col-xs-7">{{info.price | number: '1.0-0'}}</div>
             </div>
-            <div class="col-xs-6 flex-center">
-              <label class="col-xs-5 label-text">Giảm giá(%)</label>
-              <input type="number" min="0" max="100" class="col-xs-7" [(ngModel)]="newProduct.discount" [ngModelOptions]="{standalone: true}"
-                ngDefaultControl />
+            <div class="col-xs-6 flex-center form-pad">
+              <label class="col-xs-7 label-text">Giảm giá(%)</label>
+              <div class="col-xs-5">{{info.discount}}</div>
             </div>
+          <div class="col-xs-12 flex-center form-pad">
+              <label class="col-xs-5 label-text">Giá cuối cùng</label>
+              <div class="col-xs-7">{{info.price*(100-info.discount)/100 | number: '1.0-0'}}</div>
           </div>
-          <div class="row form-pad">
-            <div class="col-xs-4 flex-center">
-              <label class="col-xs-4 label-text">New</label>
-              <div class="col-xs-8">
-                <mat-slide-toggle [color]="'primary'" [(ngModel)]="newProduct.new" [ngModelOptions]="{standalone: true}" ngDefaultControl></mat-slide-toggle>
-              </div>
+          <div class="col-xs-12 flex-center form-pad">
+            <div class="col-xs-12" *ngIf="info.image.length > 0">
+              <img [src]="img" alt="Image" *ngFor="let img of info.image" height="80px" width="80px" style="padding-right: 1rem">
             </div>
-            <div class="col-xs-4 flex-center">
-              <label class="col-xs-4 label-text">Hot</label>
-              <div class="col-xs-8">
-                <mat-slide-toggle [color]="'primary'" [(ngModel)]="newProduct.hot" [ngModelOptions]="{standalone: true}" ngDefaultControl></mat-slide-toggle>
-              </div>
-            </div>
-            <div class="col-xs-4 flex-center">
-              <label class="col-xs-4 label-text">Sale</label>
-              <div class="col-xs-8">
-                <mat-slide-toggle [color]="'primary'" [(ngModel)]="newProduct.sale" [ngModelOptions]="{standalone: true}" ngDefaultControl></mat-slide-toggle>
-              </div>
-            </div>
-          </div>
-          <div class="row flex-center form-pad">
-            <label class="col-xs-4 label-text">Mô tả chi tiết</label>
-            <textarea type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.description[0]"></textarea>
-          </div>
-          <div class="row flex-center form-pad">
-            <label class="col-xs-4 label-text">Chất liệu</label>
-            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.description[1]"
-            />
-          </div>
-          <div class="row flex-center form-pad">
-            <label class="col-xs-4 label-text">Thông tin khác</label>
-            <textarea type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="newProduct.description[2]"></textarea>
-          </div>
-          <div class="row form-pad flex-center">
-            <div class="col-xs-12">
-              <label class="col-xs-5 label-text">Hình ảnh</label>
-              <input type="file" class="col-xs-7" multiple id="newImages" (change)="encodeImg('newImages', newProduct)" />
-            </div>
-            <div class="col-xs-12" *ngIf="newProduct.image.length > 0">
-              <img [src]="img" alt="Image" *ngFor="let img of newProduct.image" height="40px" width="40px" style="padding-right: 1rem">
-            </div>
-          </div>
-          <div class="form-pad" style="text-align: center">
-            <button class="btn btn-primary btn-xs" style="color: white" [disabled]="validForm(newProduct)" (click)="checkProductId(newProduct.productId)">Tạo mới</button>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm('newImages', true, '#editProduct')">Thoát</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearInfo()">Thoát</button>
       </div>
     </div>
   </div>
 </div>
 
+<div id="infoAddress" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Thông tin địa chỉ của khách hàng</h3>
+        </div>
+        <div class="modal-body">
+          <form class="ng-form row form-group">
+              <h4>
+                {{infoAddress}}
+              </h4>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div id="editProduct" class="modal fade" role="dialog">
+  <div id="editOrder" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title">Thay đổi tình trạng đơn hàng</h3>
+          </div>
+          <div class="modal-body">
+            <form class="ng-form row form-group">
+              <div class="col-xs-12 text-center"> 
+                <select name="orderStatus" [(ngModel)]="editItem.status" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                  <option value="PENDING">Chờ</option>
+                  <option value="PROCESS">Đang</option>
+                  <option value="COMPLETED">Xong</option>
+                </select></div> 
+                <div class="form-pad" style="text-align: center">
+                    <button class="btn btn-primary btn-xs" style="color: white" mwlConfirmationPopover
+                    [popoverClass]="'text-center-imp'"
+                    [popoverTitle]="'Xác nhận'"
+                    [popoverMessage]="'Bạn muốn cập nhật trạng thái?'"
+                    placement="top"
+                    [confirmText]="'Xác nhận'" [cancelText]="'Hủy'"
+                    (confirm)="updateOrder(editItem)">Cập nhật</button>
+                  </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- <div id="editProduct" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="clearForm('editImages', false, '#createNew')">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" (click)="clearForm(false, '#createNew')">&times;</button>
         <h3 class="modal-title">Chỉnh sửa sản phẩm</h3>
       </div>
       <div class="modal-body">
@@ -251,13 +247,24 @@
             <label class="col-xs-4 label-text">Thông tin khác</label>
             <textarea type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.description[2]"></textarea>
           </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 1</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[0]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 2</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[1]"
+            />
+          </div>
+          <div class="row flex-center form-pad">
+            <label class="col-xs-4 label-text">Link Ảnh 3</label>
+            <input type="text" class="col-xs-8" [ngModelOptions]="{standalone: true}" ngDefaultControl [(ngModel)]="editProductModel.image[2]"
+            />
+          </div>
           <div class="row form-pad flex-center">
-            <div class="col-xs-12">
-              <label class="col-xs-5 label-text">Hình ảnh</label>
-              <input type="file" class="col-xs-7" multiple id="editImages" (change)="encodeImg('editImages', editProductModel)" />
-            </div>
             <div class="col-xs-12 row" *ngIf="editProductModel.image.length > 0">
-                <img [src]="img" alt="Image" style="padding-right: 1rem" height="40px" width="40px" *ngFor="let img of editProductModel.image">
+                <img [src]="img" alt="Image" style="padding-right: 1rem" height="80px" width="80px" *ngFor="let img of editProductModel.image">
             </div>
           </div>
           <div class="form-pad" style="text-align: center">
@@ -266,8 +273,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm('editImages', false, '#editProduct')">Thoát</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clearForm(false, '#editProduct')">Thoát</button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
