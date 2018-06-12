@@ -2,28 +2,21 @@
 
   <div class="box">
       <form>
-          <h1>Checkout</h1>
           <ul class="nav nav-pills nav-justified">
-              <li class=""><a [routerLink]="['../checkout-order']"><i class="fa fa-map-marker"></i><br>Order</a>
+              <li class=""><a [routerLink]="['../checkout-order']"><i class="fa fa-map-marker"></i><br>Đơn hàng</a>
               </li>
-              <li class="active"><a [routerLink]="['../checkout-delivery']"><i class="fa fa-truck"></i><br>Delivery Method</a>
+              <li class="active"><a [routerLink]="['../checkout-delivery']"><i class="fa fa-truck"></i><br>Thông tin khách hàng</a>
               </li>
-              <li class="disabled"><a><i class="fa fa-eye"></i><br>Order Review</a>
+              <li class="disabled"><a><i class="fa fa-eye"></i><br>Tổng kết đơn hàng</a>
               </li>
           </ul>
 
           <div class="content">
               <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-12">
                       <div class="form-group">
-                          <label for="firstname">Firstname</label>
-                          <input type="text" class="form-control" id="firstname">
-                      </div>
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <label for="lastname">Lastname</label>
-                          <input type="text" class="form-control" id="lastname">
+                          <label for="firstname">Họ Tên</label>
+                          <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="userModel.name">
                       </div>
                   </div>
               </div>
@@ -32,68 +25,32 @@
               <div class="row">
                   <div class="col-sm-6">
                       <div class="form-group">
-                          <label for="company">Company</label>
-                          <input type="text" class="form-control" id="company">
-                      </div>
-                  </div>
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <label for="street">Street</label>
-                          <input type="text" class="form-control" id="street">
-                      </div>
-                  </div>
-              </div>
-              <!-- /.row -->
-
-              <div class="row">
-                  <div class="col-sm-6 col-md-3">
-                      <div class="form-group">
-                          <label for="city">Company</label>
-                          <input type="text" class="form-control" id="city">
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-3">
-                      <div class="form-group">
-                          <label for="zip">ZIP</label>
-                          <input type="text" class="form-control" id="zip">
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-3">
-                      <div class="form-group">
-                          <label for="state">State</label>
-                          <select class="form-control" id="state"></select>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-3">
-                      <div class="form-group">
-                          <label for="country">Country</label>
-                          <select class="form-control" id="country"></select>
-                      </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                      <div class="form-group">
-                          <label for="phone">Telephone</label>
-                          <input type="text" class="form-control" id="phone">
+                          <label for="phone">Số điện thoại</label>
+                          <input type="number" min="0" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="userModel.phone">
                       </div>
                   </div>
                   <div class="col-sm-6">
                       <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="text" class="form-control" id="email">
+                          <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="userModel.email">
                       </div>
                   </div>
-
+                  <div class="col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <label for="state">Địa chỉ (Không bắt buộc)</label>
+                        <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="userModel.address">
+                    </div>
+                </div>
               </div>
               <!-- /.row -->
           </div>
 
           <div class="box-footer">
               <div class="pull-left">
-                  <a [routerLink]="['../checkout-order']" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to your order</a>
+                  <a [routerLink]="['../checkout-order']" class="btn btn-default"><i class="fa fa-chevron-left"></i>Trở về đơn hàng</a>
               </div>
               <div class="pull-right">
-                  <button [routerLink]="['../checkout-review']" class="btn btn-primary">Continue to order review<i class="fa fa-chevron-right"></i>
+                  <button class="btn btn-primary" (click)="saveGuestInfo()" [disabled]="validGuestInfo()">Tiếp tục<i class="fa fa-chevron-right"></i>
                   </button>
               </div>
           </div>

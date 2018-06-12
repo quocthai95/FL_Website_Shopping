@@ -2,13 +2,12 @@
 
   <div class="box">
       <form>
-          <h1>Checkout - Order review</h1>
           <ul class="nav nav-pills nav-justified">
-              <li><a [routerLink]="['../checkout-order']"><i class="fa fa-map-marker"></i><br>Order</a>
+              <li><a [routerLink]="['../checkout-order']"><i class="fa fa-map-marker"></i><br>Đơn hàng</a>
               </li>
-              <li><a [routerLink]="['../checkout-delivery']"><i class="fa fa-truck"></i><br>Delivery Method</a>
+              <li><a [routerLink]="['../checkout-delivery']"><i class="fa fa-truck"></i><br>Thông tin khách hàng</a>
               </li>
-              <li class="active"><a><i class="fa fa-eye"></i><br>Order Review</a>
+              <li class="active"><a><i class="fa fa-eye"></i><br>Tổng kết đơn hàng</a>
               </li>
           </ul>
 
@@ -17,35 +16,36 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th colspan="2">Product</th>
-                      <th>Quantity</th>
-                      <th>Unit price</th>
-                      <th>Discount</th>
-                      <th colspan="2">Total</th>
+                      <th colspan="2">Sản phẩm</th>
+                      <th>Số lượng</th>
+                      <th>Giá</th>
+                      <th>Giảm giá</th>
+                      <th colspan="2">Tổng</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of productOrder; let i = index">
                       <td>
                         <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
-                          <img src="{{item.img[0]}}" alt="{{item.name}}">
+                          <img src="{{item.image[0]}}" alt="{{item.productName}}">
                         </a>
                       </td>
                       <td>
-                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.name}}</a>
+                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
                       </td>
                       <td>
-                        <input type="number" readonly class="form-control"  [name]="item.name" [(ngModel)]="item.quantity">
+                        <input type="number" readonly class="form-control"  [name]="item.productName" [(ngModel)]="item.amount">
                       </td>
-                      <td>{{item.price | currency:'USD':'symbol':'1.2-2'}}</td>
-                      <td>$0.00</td>
-                      <td>{{item.price*item.quantity | currency:'USD':'symbol':'1.2-2'}}</td>
+                      <td>{{item.price | number:'1.0-0'}}</td>
+                      <td>{{item.discount?item.discount:0}}%</td>
+                      <td *ngIf="!item.discount">{{item.price*item.amount | number:'1.0-0'}}</td>
+                      <td *ngIf="item.discount">{{item.price*(100-item.discount)/100*item.amount | number:'1.0-0'}}</td>
                     </tr>              
                   </tbody>
                   <tfoot>
                     <tr>
                       <th colspan="5">Total</th>
-                      <th colspan="2">{{totalPrice | currency:'USD':'symbol':'1.2-2'}}</th>
+                      <th colspan="2">{{totalPrice | number:'1.0-0'}}</th>
                     </tr>
                   </tfoot>
                 </table>
@@ -56,10 +56,17 @@
 
           <div class="box-footer">
               <div class="pull-left">
-                  <a [routerLink]="['../checkout-delivery']" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Delivery</a>
+                  <a [routerLink]="['../checkout-delivery']" class="btn btn-default"><i class="fa fa-chevron-left"></i>Trở về thông tin khách hàng</a>
               </div>
               <div class="pull-right">
-                  <button [routerLink]="['../completed-order']" class="btn btn-primary">Place an order<i class="fa fa-chevron-right"></i>
+                  <button mwlConfirmationPopover
+                  [popoverClass]="'text-center-imp'"
+                  [popoverTitle]="'Xác nhận'"
+                  [popoverMessage]="'Bạn muốn đặt đơn hàng này?'"
+                  placement="top"
+                  [confirmText]="'Xác nhận'"  
+                  [cancelText]="'Hủy'"
+                  (confirm)="placeOrder()" class="btn btn-primary">Đặt hàng<i class="fa fa-chevron-right"></i>
                   </button>
               </div>
           </div>

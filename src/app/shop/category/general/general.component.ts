@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromAppReducer from '../../../store/app.reducer';
-import * as fromProductReducer from '../../../store/product.reducer';
-import { InitService } from '../../../shared/init.service';
+import { ProductModel } from '../../../shared/product.model';
+import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../../shared/init.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-general',
@@ -11,14 +12,41 @@ import { InitService } from '../../../shared/init.service';
   styleUrls: ['./general.component.css']
 })
 export class GeneralComponent implements OnInit {
-  listProduct: Observable<fromProductReducer.State>;
+  sortType = '';
+  listProduct: ProductModel[] = [];
+  isNew: any;
+  productCategory: string;
   currentPage = 1;
   itemsPerPage = 4;
 
-  constructor(private store: Store<fromAppReducer.AppState>, private initService: InitService) { }
+  constructor(private initService: InitService, private router: Router, private route: ActivatedRoute, private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.listProduct = this.store.select('product');
+    this.route.params.subscribe(
+      (params: Params) => {
+        showLoadingScreen();
+        this.sortType = '';
+        this.productCategory = params['category'];
+        this.isNew = (params['isNew'] === 'new') ? true : false;
+        const data = {
+          category: this.productCategory,
+          new: this.isNew
+        };
+        this.httpClient.post(DOMAINAPI + 'product/category', data, {
+          observe: 'body'
+        }).subscribe(
+          (response: any) => {
+            if (response.length > 0) {
+              this.listProduct = response;
+              hideLoadingScreen();
+            } else {
+              hideLoadingScreen();
+              this.router.navigate(['not-found']);
+            }
+          }
+        );
+      }
+    );
   }
 
 }

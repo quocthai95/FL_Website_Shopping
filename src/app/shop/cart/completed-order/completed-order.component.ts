@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-completed-order',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./completed-order.component.css']
 })
 export class CompletedOrderComponent implements OnInit {
-
-  constructor() { }
+  nameCustomer = '';
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.nameCustomer = this.route.snapshot.queryParams['nameCustomer'];
   }
 
 }

@@ -25,12 +25,8 @@ const appRoutes = [
     {path: 'shop', component: ShopComponent, children: [
         {path: '', redirectTo: 'home', pathMatch: 'full'},
         {path: 'home', component: HomeComponent},
-        // {path: 'category/:category', component: CategoryComponent, children: [
-        //     {path: 'list', component: GeneralComponent},
-        //     {path: ':id', component: ProductDetailComponent}
-        // ]},
         {path: 'productdetail/:category/:id', component: ProductDetailComponent},
-        {path: 'category/:category', component: GeneralComponent},
+        {path: 'category/:isNew/:category', component: GeneralComponent},
         {path: 'cart', component: CartComponent, children: [
             {path: '', redirectTo: 'checkout-order', pathMatch: 'full'},
             {path: 'checkout-order', component: CheckoutOrderComponent},

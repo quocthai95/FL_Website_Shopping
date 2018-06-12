@@ -5,6 +5,7 @@ import { InitService, DOMAINAPI } from '../../../shared/init.service';
 import { Observable } from 'rxjs/Observable';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { HttpClient } from '@angular/common/http';
+import { QueryParamsHandling } from '@angular/router/src/config';
 
 declare const $: any;
 @Component({

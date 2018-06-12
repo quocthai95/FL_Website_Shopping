@@ -5,20 +5,23 @@
 
       <ul class="breadcrumb">
         <li>
-          <a [routerLink]="['/shop/home']">Home</a>
+          <a [routerLink]="['/shop/home']">Trang chủ</a>
         </li>
-        <li>Ladies</li>
+        <li *ngIf="isNew">Mới</li>
+        <li *ngIf="!isNew">Cũ</li>
+        <li *ngIf="productCategory === 'BAN'">Bàn</li>
+        <li *ngIf="productCategory === 'QUAY'">Quầy</li>
+        <li *ngIf="productCategory === 'BON'">Bồn</li>
+        <li *ngIf="productCategory === 'BEP'">Bếp</li>
+        <li *ngIf="productCategory === 'KHAC'">Sản phẩm khác</li>
       </ul>
-
       <div class="box">
-        <h1>Ladies</h1>
-        <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
         <div class="info-bar">
           <div class="row">
             <div class="col-sm-12 col-md-4 products-showing">
-              Showing
-              <strong>{{itemsPerPage*currentPage}}</strong> of
-              <strong>{{(listProduct | async).products.length}}</strong> products
+              Hiện
+              <strong *ngIf="itemsPerPage > listProduct.length">{{listProduct.length}}</strong><strong *ngIf="itemsPerPage < listProduct.length">{{itemsPerPage*currentPage}}</strong> trên
+              <strong>{{listProduct.length}}</strong> sản phẩm
             </div>
   
             <div class="col-sm-12 col-md-8  products-number-sort">
@@ -26,11 +29,11 @@
                 <form class="form-inline">
                   <div class="col-md-6 col-sm-6" style="float:right">
                     <div class="products-sort-by">
-                      <strong>Sort by</strong>
-                      <select name="sort-by" class="form-control">
-                        <option>Price</option>
-                        <option>Name</option>
-                        <option>Sales first</option>
+                      <strong>Xếp theo</strong>
+                      <select name="sort-by" class="form-control" [(ngModel)]="sortType">
+                        <option value="">Chọn</option>
+                        <option value="upPrice">Giá tăng</option>
+                        <option value="downPrice">Giá giảm</option>
                       </select>
                     </div>
                   </div>
@@ -45,7 +48,7 @@
 
       <div class="row products">
 
-        <div class="col-md-3 col-sm-4" *ngFor="let item of (listProduct | async).products | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage} ">
+        <div class="col-md-3 col-sm-4" *ngFor="let item of listProduct | orderBy:sortType | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage} ">
           <div class="product">
             <!-- <div class="flip-container">
               <div class="flipper">
@@ -62,15 +65,17 @@
               </div>
             </div> -->
             <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
-              <img src="{{item.img[0]}}" alt="" class="img-responsive">
+              <img src="{{item.image[0]}}" alt="" class="img-responsive">
             </a>
             <div class="text">
               <h3>
-                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">Fur coat with very but very very long name</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
               </h3>
-              <p class="price"><del *ngIf="item.oldPrice">{{item.oldPrice | currency:'USD':'symbol':'1.2-2'}}</del> {{item.price | currency:'USD':'symbol':'1.2-2'}}</p>
+              <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="!item.price">Liên hệ</p>
               <p class="buttons">
-                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="btn btn-default">View detail</a>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="btn btn-default">Xem chi tiết</a>
               </p>
             </div>
             <!-- /.text -->

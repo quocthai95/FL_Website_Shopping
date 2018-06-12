@@ -1,67 +1,17 @@
 <div class="col-md-9" id="checkout">
 
-  <div class="box">
-      <form>
-          <h1>Completed Order</h1>
-          <!-- <ul class="nav nav-pills nav-justified">
-              <li><a [routerLink]="['../checkout-order']"><i class="fa fa-map-marker"></i><br>Order</a>
-              </li>
-              <li><a [routerLink]="['../checkout-delivery']"><i class="fa fa-truck"></i><br>Delivery Method</a>
-              </li>
-              <li class="active"><a><i class="fa fa-eye"></i><br>Order Review</a>
-              </li>
-          </ul>
-
-          <div class="content">
-            <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th colspan="2">Product</th>
-                      <th>Quantity</th>
-                      <th>Unit price</th>
-                      <th>Discount</th>
-                      <th colspan="2">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of productOrder; let i = index">
-                      <td>
-                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
-                          <img src="{{item.img[0]}}" alt="{{item.name}}">
-                        </a>
-                      </td>
-                      <td>
-                        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.name}}</a>
-                      </td>
-                      <td>
-                        <input type="number" readonly class="form-control"  [name]="item.name" [(ngModel)]="item.quantity">
-                      </td>
-                      <td>{{item.price | currency:'USD':'symbol':'1.2-2'}}</td>
-                      <td>$0.00</td>
-                      <td>{{item.price*item.quantity | currency:'USD':'symbol':'1.2-2'}}</td>
-                    </tr>              
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="5">Total</th>
-                      <th colspan="2">{{totalPrice | currency:'USD':'symbol':'1.2-2'}}</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-          </div>-->
-
-          <!-- <div class="box-footer">
-              <div class="pull-left">
-                  <a [routerLink]="['../checkout-delivery']" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Delivery</a>
-              </div>
-              <div class="pull-right">
-                  <button class="btn btn-primary">Place an order<i class="fa fa-chevron-right"></i>
-                  </button>
-              </div>
-          </div> -->
-      </form>
+  <div class="row box" *ngIf="nameCustomer">
+    <div class="col-xs-6">
+        <h1>{{nameCustomer}} đã đặt hàng thành công!</h1>
+        <br>
+        <p>Đơn hàng của bạn đang được chúng tôi xử lý!</p>
+        <br>
+        <p>Chúng tôi sẽ liên lạc bạn sớm nhất ngay khi đơn hàng thông qua!</p>
+    </div>
+    <div class="col-xs-6">
+      <img src="assets/images/ordered.png" height="300" width="400" alt="Ordered">
+    </div>
+          
   </div>
   <!-- /.box -->
 

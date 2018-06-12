@@ -25,7 +25,11 @@ export class CheckoutOrderComponent implements OnInit {
   checkTotalPrice() {
     this.totalPrice = 0;
     this.productOrder.forEach(item => {
-      this.totalPrice += item.price * item.amount;
+      if (!item.discount) {
+        this.totalPrice += item.price * item.amount;
+      } else {
+        this.totalPrice += item.price * ( 100 - item.discount) / 100 * item.amount;
+      }
     });
     this.sharedDataService.totalPriceObs.next(this.totalPrice);
     localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));

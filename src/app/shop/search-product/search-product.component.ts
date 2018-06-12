@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { InitService } from '../../shared/init.service';
-import { Observable } from 'rxjs/Observable';
-import * as fromProductReducer from '../../store/product.reducer';
-import * as fromAppReducer from '../../store/app.reducer';
-import { ActivatedRoute, Params } from '@angular/router';
+import { InitService, DOMAINAPI } from '../../shared/init.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProductModel } from '../../shared/product.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search-product',
@@ -12,17 +11,28 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./search-product.component.css']
 })
 export class SearchProductComponent implements OnInit {
-  listProduct: Observable<fromProductReducer.State>;
+  listProduct: ProductModel[] = [];
   currentPage = 1;
   itemsPerPage = 4;
+  sortType = '';
 
-  constructor(private store: Store<fromAppReducer.AppState>, private initService: InitService, private route: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient, private initService: InitService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       (query: Params) => {
-        console.log(query);
-        this.listProduct = this.store.select('product');
+        this.sortType = '';
+        this.httpClient.get(DOMAINAPI + 'product/search/' + query['nameProduct'], {
+          observe: 'body'
+        }).subscribe(
+          (response: any) => {
+            if (response) {
+              this.listProduct = response;
+            } else {
+              this.router.navigate(['not-found']);
+            }
+          }
+        )
       }
     );
   }

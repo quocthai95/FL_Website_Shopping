@@ -18,6 +18,7 @@ import { ShopComponent } from './shop.component';
 import { CoreModule } from '../core/core.module';
 import { SearchProductComponent } from './search-product/search-product.component';
 import { CompletedOrderComponent } from './cart/completed-order/completed-order.component';
+import { OrderByPipe } from '../shared/orderBy.pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CompletedOrderComponent } from './cart/completed-order/completed-order.
         CheckoutOrderComponent,
         CheckoutOrderReviewComponent,
         SearchProductComponent,
-        CompletedOrderComponent
+        CompletedOrderComponent,
+        OrderByPipe
     ],
     imports: [
         CommonModule,

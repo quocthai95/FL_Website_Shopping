@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { SharedDataService } from '../../shared/shared-data.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -7,11 +7,11 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit, OnDestroy, AfterViewInit {
   totalPrice = 0;
   subscription: Subscription;
 
-  constructor(private sharedDataService: SharedDataService) { }
+  constructor(private sharedDataService: SharedDataService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (localStorage.getItem('totalPrice')) {
@@ -20,6 +20,10 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscription = this.sharedDataService.totalPriceObs.subscribe((data: number) => {
       this.totalPrice = data;
     });
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 
   ngOnDestroy() {

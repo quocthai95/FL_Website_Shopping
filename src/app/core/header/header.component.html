@@ -95,10 +95,10 @@ _________________________________________________________ -->
 
       <ul class="nav navbar-nav navbar-left">
         <li [routerLink]="['/shop/home']" routerLinkActive="active">
-          <a>Home</a>
+          <a>Trang chủ</a>
         </li>
         <li class="dropdown yamm-fw" routerLinkActive="active">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men
+          <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Cửa hàng
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -106,85 +106,42 @@ _________________________________________________________ -->
               <div class="yamm-content">
                 <div class="row">
                   <div class="col-sm-3">
-                    <h5>Clothing</h5>
+                    <h5>Đồ cũ</h5>
                     <ul>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">T-shirts</a>
+                        <a [routerLink]="['/shop/category', 'old','BAN']">Bàn</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Shirts</a>
+                        <a [routerLink]="['/shop/category', 'old','BEP']">Bếp</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Pants</a>
+                        <a [routerLink]="['/shop/category', 'old','BON']" >Bồn</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Accessories</a>
+                        <a [routerLink]="['/shop/category', 'old','QUAY']" >Quầy</a>
+                      </li>
+                      <li>
+                        <a [routerLink]="['/shop/category', 'old','KHAC']" >Sản phẩm khác</a>
                       </li>
                     </ul>
                   </div>
                   <div class="col-sm-3">
-                    <h5>Shoes</h5>
+                    <h5>Đồ mới</h5>
                     <ul>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
+                        <a [routerLink]="['/shop/category', 'new', 'BAN']">Bàn</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
+                        <a [routerLink]="['/shop/category', 'new','BEP']">Bếp</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
+                        <a [routerLink]="['/shop/category', 'new','BON']">Bồn</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-3">
-                    <h5>Accessories</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
+                        <a [routerLink]="['/shop/category', 'new','QUAY']">Quầy</a>
                       </li>
                       <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-3">
-                    <h5>Featured</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                    </ul>
-                    <h5>Looks and trends</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
+                        <a [routerLink]="['/shop/category', 'new','KHAC']">Sản phẩm khác</a>
                       </li>
                     </ul>
                   </div>
@@ -194,101 +151,8 @@ _________________________________________________________ -->
             </li>
           </ul>
         </li>
-
-        <li class="dropdown yamm-fw" routerLinkActive="active">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="yamm-content">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h5>Clothing</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">T-shirts</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Shirts</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Pants</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Accessories</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-3">
-                    <h5>Shoes</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-3">
-                    <h5>Accessories</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Casual</a>
-                      </li>
-                    </ul>
-                    <h5>Looks and trends</h5>
-                    <ul>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Trainers</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Sandals</a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/shop/productdetail','general']">Hiking shoes</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="banner">
-                      <a href="#">
-                        <img src="assets/images/banner.jpg" class="img img-responsive" alt="">
-                      </a>
-                    </div>
-                    <div class="banner">
-                      <a href="#">
-                        <img src="assets/images/banner2.jpg" class="img img-responsive" alt="">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.yamm-content -->
-            </li>
-          </ul>
+        <li [routerLink]="['/shop/aboutus']" routerLinkActive="active">
+          <a>Về chúng tôi</a>
         </li>
       </ul>
 
@@ -300,7 +164,7 @@ _________________________________________________________ -->
       <div class="navbar-collapse collapse right" id="basket-overview">
         <a [routerLink]="['/shop/cart']" class="btn btn-primary navbar-btn">
           <i class="fa fa-shopping-cart"></i>
-          <span class="hidden-sm">{{cartItems}} item(s) in cart</span>
+          <span class="hidden-sm">{{cartItems}} món hàng trong giỏ</span>
         </a>
       </div>
       <!--/.nav-collapse -->
@@ -318,7 +182,7 @@ _________________________________________________________ -->
 
       <form class="navbar-form" role="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search"  [ngModelOptions]="{standalone: true}" [(ngModel)]="searchText">
+          <input type="text" class="form-control" placeholder="Tìm kiếm"  [ngModelOptions]="{standalone: true}" [(ngModel)]="searchText">
           <span class="input-group-btn">
 
             <button [routerLink]="['/shop/search']" [queryParams]="{nameProduct: searchText}" class="btn btn-primary">

@@ -23,7 +23,7 @@
         <div class="table-responsive">
           <table class="table">
             <tbody>
-              <tr class="total">
+              <tr class="total" *ngIf="totalPrice">
                 <td>Tổng giá</td>
                 <th>{{totalPrice | number:'1.0-0'}}</th>
               </tr>
