@@ -81,14 +81,14 @@
 
 
   <div class="row same-height-row">
-    <div class="col-md-3 col-sm-6">
+    <!-- <div class="col-md-3 col-sm-6">
       <div class="box same-height">
         <h3>You may also like these products</h3>
       </div>
-    </div>
+    </div> -->
 
-    <div class="col-md-3 col-sm-6">
-      <div class="product same-height">
+    <div class="col-md-4 col-sm-6" *ngFor="let item of relateProducts">
+      <div class="product relate-product same-height">
         <!-- <div class="flip-container">
           <div class="flipper">
             <div class="front">
@@ -103,74 +103,33 @@
             </div>
           </div>
         </div> -->
-        <a href="detail.html" class="">
-          <img src="assets/images/product2.jpg" alt="Image" class="img-responsive">
+        <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+          <img [src]="item.image[0]" alt="Image" class="img-responsive">
         </a>
         <div class="text">
-          <h3>Fur coat</h3>
-          <p class="price">$143</p>
+          <h3><a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a></h3>
+          <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+          <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+          <p class="price" *ngIf="!item.price">Liên hệ</p>
+        </div>
+        <div class="ribbon sale" *ngIf="item.sale">
+          <div class="theribbon">SALE</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon -->
+
+        <div class="ribbon new" *ngIf="item.new">
+          <div class="theribbon">NEW</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon -->
+
+        <div class="ribbon gift" *ngIf="item.hot">
+          <div class="theribbon">HOT</div>
+          <div class="ribbon-background"></div>
         </div>
       </div>
       <!-- /.product -->
     </div>
-
-    <div class="col-md-3 col-sm-6">
-      <div class="product same-height">
-        <!-- <div class="flip-container">
-          <div class="flipper">
-            <div class="front">
-              <a href="detail.html">
-                <img src="assets/images/product1.jpg" alt="Image" class="img-responsive">
-              </a>
-            </div>
-            <div class="back">
-              <a href="detail.html">
-                <img src="assets/images/product1_2.jpg" alt="Image" class="img-responsive">
-              </a>
-            </div>
-          </div>
-        </div> -->
-        <a href="detail.html" class="">
-          <img src="assets/images/product1.jpg" alt="Image" class="img-responsive">
-        </a>
-        <div class="text">
-          <h3>Fur coat</h3>
-          <p class="price">$143</p>
-        </div>
-      </div>
-      <!-- /.product -->
-    </div>
-
-
-    <div class="col-md-3 col-sm-6">
-      <div class="product same-height">
-        <!-- <div class="flip-container">
-          <div class="flipper">
-            <div class="front">
-              <a href="detail.html">
-                <img src="assets/images/product3.jpg" alt="Image" class="img-responsive">
-              </a>
-            </div>
-            <div class="back">
-              <a href="detail.html">
-                <img src="assets/images/product3_2.jpg" alt="Image" class="img-responsive">
-              </a>
-            </div>
-          </div>
-        </div> -->
-        <a href="detail.html" class="">
-          <img src="assets/images/product3.jpg" alt="Image" class="img-responsive">
-        </a>
-        <div class="text">
-          <h3>Fur coat</h3>
-          <p class="price">$143</p>
-
-        </div>
-      </div>
-      <!-- /.product -->
-    </div>
-
   </div>
-
-
 </div>

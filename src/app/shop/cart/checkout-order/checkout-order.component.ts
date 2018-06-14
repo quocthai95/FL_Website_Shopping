@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { DOMAINAPI } from '../../../shared/init.service';
 
 @Component({
   selector: 'app-checkout-order',
@@ -9,12 +11,21 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./checkout-order.component.css']
 })
 export class CheckoutOrderComponent implements OnInit {
+  relateProducts = [];
   productOrder = null;
   totalPrice = 0;
   popperTitle = `<b>Xác nhận</b>`;
-  constructor(private sharedDataService: SharedDataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private sharedDataService: SharedDataService, private router: Router,
+     private route: ActivatedRoute, private httpClient: HttpClient) { }
 
   ngOnInit() {
+    this.httpClient.get(DOMAINAPI + 'randomproduct', {
+      observe: 'body'
+    }).subscribe(
+      (response: any) => {
+        this.relateProducts = response;
+      }
+    );
     if (localStorage.getItem('productOrder')) {
       this.productOrder = JSON.parse(localStorage.getItem('productOrder'));
       this.checkTotalPrice();

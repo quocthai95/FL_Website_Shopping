@@ -3,6 +3,7 @@ import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '..
 import { HttpClient } from '@angular/common/http';
 import { OrderModel } from '../../../shared/order.model';
 
+declare const $: any;
 @Component({
   selector: 'app-order-management',
   templateUrl: './order-management.component.html',
@@ -12,7 +13,7 @@ export class OrderManagementComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 8;
   listOrder = [];
-  searchType = 'NAME';
+  searchType = 'ORDERID';
   searchText = '';
 
   editItem = {
@@ -29,6 +30,7 @@ export class OrderManagementComponent implements OnInit {
   };
 
   infoItem = [];
+  infoAddress = '';
 
   constructor(private inItService: InitService, private httpClient: HttpClient) { }
 
@@ -49,7 +51,7 @@ export class OrderManagementComponent implements OnInit {
   }
 
   returnInfoItem(item) {
-    this.infoItem = item;
+    this.infoItem = Object.assign(this.infoItem, item);
   }
 
   returnInfoStatus(item) {
@@ -57,24 +59,38 @@ export class OrderManagementComponent implements OnInit {
   }
 
   returnInfoAdress(item) {
-    this.editItem = item;
+    this.infoAddress =  item;
   }
 
   updateOrder(item) {
+    showLoadingScreen();
     this.httpClient.patch(DOMAINAPI + 'order/' + item._id, item, {
       observe: 'body'
     }).subscribe(
-      (response) => {
-
+      () => {
+    this.httpClient.get(DOMAINAPI + 'order/listOrder', {
+      observe: 'body'
+    }).subscribe(
+      (response: any) => {
+        this.listOrder = response;
+        hideLoadingScreen();
+      },
+      (error => {
+        hideLoadingScreen();
+        alert('Lỗi không lấy được dữ liệu!');
+      })
+    );
       },
       (err) => {
         alert('Lỗi cập nhật đơn hàng!');
       }
     );
+    $('#editOrder').modal('hide');
   }
 
-  clearInfo() {
-    this.infoItem = [];
+  checkStatusFilter() {
+    if (this.searchType === 'STATUS') {
+      this.searchText = 'PENDING';
+    }
   }
-
 }
