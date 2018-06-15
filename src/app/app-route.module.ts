@@ -41,7 +41,7 @@ const appRoutes = [
         {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
         {path: 'login', component: LoginComponent},
         {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
-            {path: '', redirectTo: 'product-management', pathMatch: 'full'},
+            {path: '', redirectTo: 'order-management', pathMatch: 'full'},
             {path: 'product-management', component: ProductManagementComponent},
             {path: 'order-management', component: OrderManagementComponent}
         ]}
