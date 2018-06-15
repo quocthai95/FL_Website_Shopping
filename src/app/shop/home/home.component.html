@@ -78,7 +78,7 @@ _________________________________________________________ -->
 
   <!-- *** HOT PRODUCT SLIDESHOW ***
 _________________________________________________________ -->
-  <div class="hot">
+  <div class="hot hidden-xs">
 
     <div class="box">
       <div class="container">
@@ -149,13 +149,85 @@ _________________________________________________________ -->
     <!-- /.container -->
 
   </div>
+
+  <div class="hot visible-xs">
+
+    <div class="box">
+      <div class="container">
+        <div class="col-xs-12">
+          <h2>các sản phẩm bán chạy</h2>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="container">
+      <owl-carousel class="product-slider" [options]="{items: 1, dots: true, navigation: true}"
+      [items]="hotProduct" 
+      [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
+        <div class="item" *ngFor="let item of hotProduct ">
+          <div class="product">
+            <!-- <div class="flip-container">
+              <div class="flipper">
+                <div class="front">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                    <img src="{{item.img[0]}}" alt="Image" class="img-responsive">
+                  </a>
+                </div>
+                <div class="back">
+                  <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                    <img src="{{item.img[1]}}" alt="Image" class="img-responsive">
+                  </a>
+                </div>
+              </div>
+            </div> -->
+            <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
+              <img src="{{item.image[0]}}" alt="Image" class="img-responsive">
+            </a>
+            <div class="text">
+              <h3>
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
+              </h3>
+              <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+              <p class="price" *ngIf="!item.price">Liên hệ</p>
+            </div>
+            <!-- /.text -->
+
+            <div class="ribbon sale" *ngIf="item.sale">
+              <div class="theribbon">SALE</div>
+              <div class="ribbon-background"></div>
+            </div>
+            <!-- /.ribbon -->
+
+            <div class="ribbon new" *ngIf="item.new">
+              <div class="theribbon">NEW</div>
+              <div class="ribbon-background"></div>
+            </div>
+            <!-- /.ribbon -->
+
+            <div class="ribbon gift" *ngIf="item.hot">
+              <div class="theribbon">HOT</div>
+              <div class="ribbon-background"></div>
+            </div>
+            <!-- /.ribbon -->
+          </div>
+          <!-- /.product -->
+        </div>
+      </owl-carousel>
+      <!-- /.product-slider -->
+    </div>
+    <!-- /.container -->
+
+  </div>
   <!-- /.hot -->
 
   <!-- *** HOT END *** -->
 
   <!-- *** HOT SALE PRODUCT SLIDESHOW ***
 _________________________________________________________ -->
-<div class="hot">
+<div class="hot hidden-xs">
 
   <div class="box">
     <div class="container">
@@ -226,17 +298,90 @@ _________________________________________________________ -->
   <!-- /.container -->
 
 </div>
+
+<div class="hot visible-xs">
+
+  <div class="box">
+    <div class="container">
+      <div class="col-md-12">
+        <h2>các sản phẩm đang giảm giá</h2>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="container">
+    <owl-carousel class="product-slider" [options]="{items: 1, dots: true, navigation: true}"
+    [items]="saleProduct" 
+    [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
+      <div class="item" *ngFor="let item of saleProduct">
+        <div class="product">
+          <!-- <div class="flip-container">
+            <div class="flipper">
+              <div class="front">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                  <img src="{{item.img[0]}}" alt="Image" class="img-responsive">
+                </a>
+              </div>
+              <div class="back">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                  <img src="{{item.img[1]}}" alt="Image" class="img-responsive">
+                </a>
+              </div>
+            </div>
+          </div> -->
+          <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
+            <img src="{{item.image[0]}}" alt="Image" class="img-responsive">
+          </a>
+          <div class="text">
+            <h3>
+              <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
+            </h3>
+            <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.price">Liên hệ</p>
+          </div>
+          <!-- /.text -->
+
+          <div class="ribbon sale" *ngIf="item.sale">
+            <div class="theribbon">SALE</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+
+          <div class="ribbon new" *ngIf="item.new">
+            <div class="theribbon">NEW</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+
+          <div class="ribbon gift" *ngIf="item.hot">
+            <div class="theribbon">HOT</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+        </div>
+        <!-- /.product -->
+      </div>
+    </owl-carousel>
+    <!-- /.product-slider -->
+  </div>
+  <!-- /.container -->
+
+</div>
+
 <!-- /#sale -->
 
 <!-- *** SALE END *** -->
 
 <!-- *** NEW PRODUCT SLIDESHOW ***
 _________________________________________________________ -->
-<div class="hot">
+<div class="hot hidden-xs">
 
   <div class="box">
     <div class="container">
-      <div class="col-md-12">
+      <div class="col-xs-12">
         <h2>các sản phẩm mới về</h2>
       </div>
     </div>
@@ -246,6 +391,78 @@ _________________________________________________________ -->
 
   <div class="container">
     <owl-carousel class="product-slider" [options]="{items: 4, dots: true, navigation: true, autoHeight: false}"
+    [items]="newProduct" 
+    [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
+      <div class="item" *ngFor="let item of newProduct">
+        <div class="product">
+          <!-- <div class="flip-container">
+            <div class="flipper">
+              <div class="front">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                  <img src="{{item.img[0]}}" alt="Image" class="img-responsive">
+                </a>
+              </div>
+              <div class="back">
+                <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">
+                  <img src="{{item.img[1]}}" alt="Image" class="img-responsive">
+                </a>
+              </div>
+            </div>
+          </div> -->
+          <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}" class="">
+            <img src="{{item.image[0]}}" alt="Image" class="img-responsive" >
+          </a>
+          <div class="text">
+            <h3>
+              <a [routerLink]="['/shop/productdetail', item.category, item.productId]" [queryParams]="{new: item.new}">{{item.productName}}</a>
+            </h3>
+            <p class="price" *ngIf="!item.discount">{{item.price | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="item.discount"><del>{{item.price | number:'1.0-0'}}</del> {{item.price*(100-item.discount)/100 | number:'1.0-0'}}</p>
+            <p class="price" *ngIf="!item.price">Liên hệ</p>
+          </div>
+          <!-- /.text -->
+
+          <div class="ribbon sale" *ngIf="item.sale">
+            <div class="theribbon">SALE</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+
+          <div class="ribbon new" *ngIf="item.new">
+            <div class="theribbon">NEW</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+
+          <div class="ribbon gift" *ngIf="item.hot">
+            <div class="theribbon">HOT</div>
+            <div class="ribbon-background"></div>
+          </div>
+          <!-- /.ribbon -->
+        </div>
+        <!-- /.product -->
+      </div>
+    </owl-carousel>
+    <!-- /.product-slider -->
+  </div>
+  <!-- /.container -->
+
+</div>
+
+<div class="hot visible-xs">
+
+  <div class="box">
+    <div class="container">
+      <div class="col-xs-12">
+        <h2>các sản phẩm mới về</h2>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="container">
+    <owl-carousel class="product-slider" [options]="{items: 1, dots: true, navigation: true, autoHeight: false}"
     [items]="newProduct" 
     [carouselClasses]="['owl-theme','owl-default', 'row', 'sliding']">
       <div class="item" *ngFor="let item of newProduct">

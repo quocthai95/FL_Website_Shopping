@@ -1,6 +1,6 @@
 <div class="login-page">
     <div class="form">
-      <form class="ng-form" (ngSubmit)="checkLogin(f)" #f="ngForm">
+      <form class="ng-form" (ngSubmit)="checkLogin()" #f="ngForm">
         <input type="text" placeholder="username" name="username" [(ngModel)]="username"/>
         <input type="password" placeholder="password" name="password" [(ngModel)]="password"/>
         <button type="submit">login</button>

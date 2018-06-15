@@ -5,7 +5,6 @@ import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '..
 import { Observable } from 'rxjs/Observable';
 import { SharedDataService } from '../../../shared/shared-data.service';
 import { HttpClient } from '@angular/common/http';
-import { QueryParamsHandling } from '@angular/router/src/config';
 
 declare const $: any;
 @Component({
@@ -62,8 +61,6 @@ export class ProductDetailComponent implements OnInit {
         }).subscribe(
           (response: any) => {
             this.relateProducts = response;
-          }, (err) => {
-            alert('Lỗi không tìm thấy sản phẩm liên quan!');
           }
         );
       }

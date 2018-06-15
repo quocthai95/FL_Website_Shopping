@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductManagementComponent } from './dashboard/product-management/product-management.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import {ModalGalleryModule} from 'angular-modal-gallery';
+import { ModalGalleryModule } from 'angular-modal-gallery';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';

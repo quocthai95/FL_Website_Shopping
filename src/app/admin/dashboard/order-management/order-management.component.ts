@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../../shared/init.service';
 import { HttpClient } from '@angular/common/http';
-import { OrderModel } from '../../../shared/order.model';
 
 declare const $: any;
 @Component({

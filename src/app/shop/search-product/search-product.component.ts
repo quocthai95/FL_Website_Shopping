@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { InitService, DOMAINAPI } from '../../shared/init.service';
+import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../shared/init.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductModel } from '../../shared/product.model';
 import { HttpClient } from '@angular/common/http';
@@ -21,18 +20,23 @@ export class SearchProductComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(
       (query: Params) => {
+        showLoadingScreen();
         this.sortType = '';
-        this.httpClient.get(DOMAINAPI + 'product/search/' + query['nameProduct'], {
+        this.httpClient.post(DOMAINAPI + 'product/search/', {
+          productName : query['nameProduct']
+        }, {
           observe: 'body'
         }).subscribe(
           (response: any) => {
             if (response) {
               this.listProduct = response;
+              hideLoadingScreen();
             } else {
+              hideLoadingScreen();
               this.router.navigate(['not-found']);
             }
           }
-        )
+        );
       }
     );
   }

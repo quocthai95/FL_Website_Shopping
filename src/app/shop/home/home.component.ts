@@ -1,10 +1,7 @@
 import { Component, OnInit, AfterContentInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { InitService, DOMAINAPI, showLoadingScreen, hideLoadingScreen } from '../../shared/init.service';
 import { HttpClient } from '@angular/common/http';
-import { ProductModel } from '../../shared/product.model';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
-import * as fromAppReducer from '../../store/app.reducer';
 import * as fromProductReducer from '../../store/product.reducer';
 
 @Component({
@@ -29,9 +26,6 @@ export class HomeComponent implements OnInit {
         this.newProduct = response[1].new;
         this.saleProduct = response[2].sale;
         hideLoadingScreen();
-      }, (err) => {
-        hideLoadingScreen();
-        alert('Lỗi lấy dữ liệu!');
       }
     );
   }

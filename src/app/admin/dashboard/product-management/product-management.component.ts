@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromAppReducer from '../../../store/app.reducer';
 import * as fromProductReducer from '../../../store/product.reducer';
 import { InitService, DOMAINAPI } from '../../../shared/init.service';
 import { Image, PlainGalleryConfig, PlainGalleryStrategy, LineLayout } from 'angular-modal-gallery';
-import { NgForm } from '@angular/forms';
 import { ProductModel } from '../../../shared/product.model';
 import * as ProductActions from '../../../store/product.action';
 import { HttpClient } from '@angular/common/http';
