@@ -6,7 +6,7 @@ import { AppRouteModule } from './app-route.module';
 import { InitService } from './shared/init.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/app.reducer';
+import { reducer, reducerProvider } from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffect } from './store/product.effect';
 import { ScrollTopComponent } from './others/scroll-top/scroll-top.component';
@@ -31,7 +31,7 @@ import { ModalGalleryModule } from 'angular-modal-gallery';
     EffectsModule.forRoot([ProductEffect]),
     ModalGalleryModule.forRoot()
   ],
-  providers: [InitService, SharedDataService],
+  providers: [InitService, SharedDataService, reducerProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
