@@ -9,11 +9,3 @@ export interface AppState {
 export const reducer: ActionReducerMap<AppState> = {
     product: fromProductReducer.productReducer
 };
-
-export const reducerToken = new InjectionToken<ActionReducerMap<AppState>>('Registered Reducers');
-
-export const reducerProvider = [
-    {
-        provide: reducerToken, useValue: reducer
-    }
-];

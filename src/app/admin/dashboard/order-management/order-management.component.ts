@@ -90,6 +90,9 @@ export class OrderManagementComponent implements OnInit {
   checkStatusFilter() {
     if (this.searchType === 'STATUS') {
       this.searchText = 'PENDING';
+    } else if (this.searchType !== 'STATUS' && (this.searchText === 'PENDING'
+    || this.searchText === 'PROCESS' || this.searchText === 'COMPLETED')) {
+      this.searchText = '';
     }
   }
 }
