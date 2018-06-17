@@ -59,6 +59,13 @@ export class CheckoutOrderReviewComponent implements OnInit, OnDestroy {
     }).subscribe(
       (response: any) => {
         hideLoadingScreen();
+        this.httpClient.post('/sendEmail', response, {
+          observe: 'body'
+        }).subscribe(
+          () => {
+            console.log('Gửi email thành công!');
+          }
+        );
         localStorage.removeItem('productOrder');
         localStorage.removeItem('totalPrice');
         this.sharedDataService.totalPriceObs.next(0);
