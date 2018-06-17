@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 
 declare let jQuery: any;
-export const DOMAINAPI = 'https://project-caocuong.herokuapp.com/';
+export const DOMAINAPI = '';
 
 export function showLoadingScreen() {
   jQuery('body').append('<div id="loader"><div class="loader"></div></div>');
