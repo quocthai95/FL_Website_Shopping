@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
     "productId" :{type: String, required: true},
     "productName": {type: String, required: true},
+    "productNameTemp": {type: String, required: true},
     "price": {type: Number, required: true},
     "discount": {type: Number, required: false},
     "new": {type: Boolean, default: false},

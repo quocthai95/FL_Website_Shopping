@@ -23,7 +23,7 @@ export class SearchProductComponent implements OnInit {
         showLoadingScreen();
         this.sortType = '';
         this.httpClient.post(DOMAINAPI + 'product/search/', {
-          productName : query['nameProduct']
+          productName : this.initService.change_Unicode(query['nameProduct'])
         }, {
           observe: 'body'
         }).subscribe(

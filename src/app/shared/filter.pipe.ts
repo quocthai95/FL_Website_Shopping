@@ -1,9 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { InitService } from './init.service';
 @Pipe({
   name: 'filter',
   pure: false
 })
 export class FilterPipe implements PipeTransform {
+
+  constructor(private initService: InitService) {}
+
   transform(items: any[], searchText: string, searchType: string): any[] {
     if (!items) {
         return [];
@@ -14,7 +18,7 @@ export class FilterPipe implements PipeTransform {
   searchText = searchText.toLowerCase();
   if (searchType === 'NAME') {
     return items.filter( item => {
-      return item.productName.toLowerCase().includes(searchText);
+      return item.productNameTemp.toLowerCase().includes(this.initService.change_Unicode(searchText));
     }).reverse();
    } else if (searchType === 'CATEGORY') {
     return items.filter( item => {

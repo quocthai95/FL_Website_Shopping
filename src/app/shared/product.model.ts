@@ -2,6 +2,7 @@ export interface ProductModel {
     _id: string;
     productId: string;
     productName: string;
+    productNameTemp: string;
     category: string;
     price: number;
     discount: number;

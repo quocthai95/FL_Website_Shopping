@@ -7,10 +7,11 @@
               </li>
               <li *ngIf="product.new">Mới</li>
               <li *ngIf="!product.new">Cũ</li>
-              <li *ngIf="product.category === 'BAN'">Bàn</li>
-              <li *ngIf="product.category === 'QUAY'">Quầy</li>
-              <li *ngIf="product.category === 'BON'">Bồn</li>
-              <li *ngIf="product.category === 'BEP'">Bếp</li>
+              <li *ngIf="product.category === 'NOITHAT'">Nội Thất</li>
+              <li *ngIf="product.category === 'DIENTU'">Điện Tử</li>
+              <li *ngIf="product.category === 'GIADUNG'">Gia Dụng</li>
+              <li *ngIf="product.category === 'DIENLANH'">Điện Lạnh</li>
+              <li *ngIf="product.category === 'NHQA'">Nhà Hàng, Quán Ăn</li>
               <li *ngIf="product.category === 'KHAC'">Sản phẩm khác</li>
               <li>{{product.productName}}</li>
           </ul>
@@ -31,31 +32,47 @@ _________________________________________________________ -->
                       <li routerLinkActive="active">
                           <a>Đồ cũ</a>
                           <ul>
-                              <li><a [routerLink]="['/shop/category', 'old','BAN']">Bàn</a>
+                            <li>
+                                <a [routerLink]="['/shop/category', 'old','NOITHAT']">Nội Thất</a>
                               </li>
-                              <li><a [routerLink]="['/shop/category', 'old','BEP']">Bếp</a>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'old','DIENTU']">Điện Tử</a>
                               </li>
-                              <li><a [routerLink]="['/shop/category', 'old','BON']">Bồn</a>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'old','GIADUNG']" >Gia Dụng</a>
                               </li>
-                              <li><a [routerLink]="['/shop/category', 'old','QUAY']">Quầy</a>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'old','DIENLANH']" >Điện Lạnh</a>
                               </li>
-                              <li><a [routerLink]="['/shop/category', 'old','KHAC']">Sản phẩm khác</a>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'old','NHQA']" >Nhà Hàng, Quán Ăn</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'old','KHAC']" >Sản phẩm khác</a>
                               </li>
                           </ul>
                       </li>
                       <li routerLinkActive="active">
                           <a>Đồ mới</a>
                           <ul>
-                            <li><a [routerLink]="['/shop/category', 'new','BAN']">Bàn</a>
-                            </li>
-                            <li><a [routerLink]="['/shop/category', 'new','BEP']">Bếp</a>
-                            </li>
-                            <li><a [routerLink]="['/shop/category', 'new','BON']">Bồn</a>
-                            </li>
-                            <li><a [routerLink]="['/shop/category', 'new','QUAY']">Quầy</a>
-                            </li>
-                            <li><a [routerLink]="['/shop/category', 'new','KHAC']">Sản phẩm khác</a>
-                            </li>
+                            <li>
+                                <a [routerLink]="['/shop/category', 'new','NOITHAT']">Nội Thất</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'new','DIENTU']">Điện Tử</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'new','GIADUNG']" >Gia Dụng</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'new','DIENLANH']" >Điện Lạnh</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'new','NHQA']" >Nhà Hàng, Quán Ăn</a>
+                              </li>
+                              <li>
+                                <a [routerLink]="['/shop/category', 'new','KHAC']" >Sản phẩm khác</a>
+                              </li>
                           </ul>
                       </li>
                   </ul>

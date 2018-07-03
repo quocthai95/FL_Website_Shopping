@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
     _id: null,
     productId: null,
     productName: null,
+    productNameTemp: null,
     category: '',
     price: null,
     discount: null,

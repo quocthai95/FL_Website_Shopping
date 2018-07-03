@@ -32,6 +32,7 @@ export class ProductManagementComponent implements OnInit {
     _id: null,
     productId: null,
     productName: null,
+    productNameTemp: null,
     category: '',
     price: null,
     discount: null,
@@ -47,6 +48,7 @@ export class ProductManagementComponent implements OnInit {
     _id: null,
     productId: null,
     productName: null,
+    productNameTemp: null,
     category: null,
     price: null,
     discount: null,
@@ -90,6 +92,7 @@ export class ProductManagementComponent implements OnInit {
   }
 
   createNewProduct() {
+    this.newProduct.productNameTemp = this.inItService.change_Unicode(this.newProduct.productName);
     this.store.dispatch(new ProductActions.CreateNewProduct(this.newProduct));
     this.clearForm(true, '#createNew');
   }
@@ -100,6 +103,7 @@ export class ProductManagementComponent implements OnInit {
         _id: null,
         productId: null,
         productName: null,
+        productNameTemp: null,
         category: '',
         price: null,
         discount: null,
@@ -115,6 +119,7 @@ export class ProductManagementComponent implements OnInit {
         _id: null,
         productId: null,
         productName: null,
+        productNameTemp: null,
         category: '',
         price: null,
         discount: null,
@@ -139,6 +144,7 @@ export class ProductManagementComponent implements OnInit {
   }
 
   editProduct() {
+    this.editProductModel.productNameTemp = this.inItService.change_Unicode(this.editProductModel.productName);
     this.store.dispatch(new ProductActions.UpdateProduct(this.editProductModel));
     this.clearForm(false, '#editProduct');
   }
@@ -150,6 +156,7 @@ export class ProductManagementComponent implements OnInit {
   returnEditProduct(item) {
     this.editProductModel = Object.assign(this.editProductModel, item);
   }
+
 
   // async encodeImg(id, item) {
   //   item.image = [];

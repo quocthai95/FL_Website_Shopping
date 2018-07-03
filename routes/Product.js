@@ -58,7 +58,7 @@ router.patch('/:id',function(req,res){
 
 router.post('/search',function(req,res){
     const query = req.body.productName.toString();
-    productModels.find({productName:{$regex:new RegExp( query.replace(/\s+/g,"\\s+"))}},function(err,data){
+    productModels.find({productNameTemp:{$regex:new RegExp( query.replace(/\s+/g,"\\s+"))}},function(err,data){
         if(err){
             res.json(err);
         }else{
