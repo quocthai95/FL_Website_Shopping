@@ -107,7 +107,7 @@
             </div>
           <div class="col-xs-6 flex-center form-pad">
               <label class="col-xs-5 label-text">Giá cuối cùng</label>
-              <div class="col-xs-7">{{info.price*(100-info.discount)/100 | number: '1.0-0'}}</div>
+              <div class="col-xs-7">{{info.price*(100-info.discount)/100*info.amount | number: '1.0-0'}}</div>
           </div>
           <div class="col-xs-12 flex-center form-pad">
             <div class="col-xs-12" *ngIf="info.image.length > 0">
