@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (this.auth.isAuth) {
           this.errMess = null;
           hideLoadingScreen();
-          this.router.navigate(['admin/dashboard']);
+          this.router.navigate(['boybod/dashboard']);
         } else {
           this.errMess = 'Sai tài khoản hoặc mật khẩu!';
           hideLoadingScreen();
