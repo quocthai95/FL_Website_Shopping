@@ -1,1 +1,1 @@
-module.exports = {url : 'mongodb://Agent:123456@ds247499.mlab.com:47499/qlbh19794'};
+module.exports = {url : 'mongodb://heroku_l06s119g:conjtbnjq90jhgal58bombimq2@ds231951.mlab.com:31951/heroku_l06s119g'};

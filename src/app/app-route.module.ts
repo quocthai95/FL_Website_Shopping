@@ -37,7 +37,7 @@ const appRoutes = [
         {path: 'search', component: SearchProductComponent},
         {path: 'aboutus', component: AboutComponent}
     ]},
-    {path: 'admin', children: [
+    {path: 'boybod', children: [
         {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
         {path: 'login', component: LoginComponent},
         {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [

@@ -34,10 +34,19 @@ var emailOptions = {
   };
   var infoMailOwner = {
     from: 'Đồ cũ Cao Cường <docucaocuong.it@gmail.com>',
-    to: info.guestInfor.email,
+    to: 'docucaocuong@gmail.com',
     subject: 'Xác nhận đơn hàng',
     html: '<h1>Chào <font color="red">Lâm</font>,</h1><br><h3>Có người đã đặt thành công đơn hàng: <font color="blue">' + info._id +'</font></h3><br><p>Xin hãy xử lý đơn hàng. </p><br><p>Chúc cửa hàng phát đạt!</p><p>Cửa hàng đồ cũ Cao Cường,</p>'
   };
+
+  transporter.sendMail(infoMailOwner, function(err, info) {
+    if(err) {
+        console.log(err);
+    } else {
+        console.log('Gửi mail thành công tới chủ hàng!');
+    }
+    });
+    
     transporter.sendMail(infoMailCustomer, function(err, info) {
     if(err) {
         console.log(err);
@@ -45,13 +54,7 @@ var emailOptions = {
         console.log('Gửi mail thành công!');
     }
     });
-    transporter.sendMail(infoMailOwner, function(err, info) {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log('Gửi mail thành công tới chủ hàng!');
-    }
-    });
+    
     res.send(req.body);
   });
 
